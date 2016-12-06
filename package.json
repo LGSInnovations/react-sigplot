@@ -22,16 +22,22 @@
     }
   ],
   "main": "./dist/index.js",
-  "directories": {
-    "doc": "doc,
-    "example": "examples
-  },
   "scripts": {
-    "build": ""
+    "clean": "rm -rf ./dist && mkdir ./dist",
+    "build": "npm run clean && npm run build:webpack",
+    "build:webpack": "webpack --config webpack.config.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "eslint": "^3.11.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-react": "^6.8.0",
+    "react": "^15.4.1",
+    "webpack": "^1.13.3",
+    "webpack-combine-loaders": "^2.0.3",
+    "webpack-loaders": "^1.0.0"
+  },
   "devDependencies": {},
   "peerDependencies": {
-    "react": ">=0.13.3"
+    "react": ">=15.0.0"
   }
 }
