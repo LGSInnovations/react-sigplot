@@ -1,0 +1,37 @@
+{
+  "name": "react-sigplot",
+  "description": "React wrapper for SigPlot",
+  "version": "0.0.1",
+  "homepage": "http://github.com/Axios-Engineering/react-sigplot",
+  "author": {
+    "name": "Axios Engineering",
+    "email": "sigplot@axiosengineering.com",
+    "url": "http://www.axiosengineering.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Axios-Engineering/react-sigplot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Axios-Engineering/react-sigplot/issues"
+  },
+  "licenses": [
+    {
+      "type": "LGPL",
+      "url": "https://www.gnu.org/licenses/lgpl.html"
+    }
+  ],
+  "main": "./dist/index.js",
+  "directories": {
+    "doc": "doc,
+    "example": "examples
+  },
+  "scripts": {
+    "build": ""
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": ">=0.13.3"
+  }
+}
