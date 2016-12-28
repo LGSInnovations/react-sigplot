@@ -72,8 +72,8 @@ export default class SigPlot extends Component {
 }
 
 SigPlot.propTypes = {
-  height: PropTypes.string,
-  width: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
   file: PropTypes.string,
   websocket: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.number),
