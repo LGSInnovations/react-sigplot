@@ -12,7 +12,7 @@ module.exports = {
     'react': 'react'
   },
   eslint: {
-    failOnWarning: true,
+    failOnWarning: false,
     failOnError: true
   },
   module: {
