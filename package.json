@@ -25,15 +25,10 @@
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
     "lint": "./node_modules/eslint/bin/eslint.js src/*",
-    "build": "npm run clean && npm run lint && babel src/* --out-dir dist/",
-    "build:webpack": "webpack --config webpack.config.js"
+    "build": "npm run clean && npm run lint && babel src/* --out-dir dist/"
   },
   "dependencies": {
-    "react": "^15.4.1",
-    "sigplot": "git+ssh://git@github.com/axios-engineering/sigplot.git#develop-2.0",
-    "webpack": "^1.13.3",
-    "webpack-combine-loaders": "^2.0.3",
-    "webpack-loaders": "^1.0.0"
+    "sigplot": "git+ssh://git@github.com/axios-engineering/sigplot.git#develop-2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -49,6 +44,6 @@
     "eslint-plugin-react": "^6.8.0"
   },
   "peerDependencies": {
-    "react": ">=15.0.0"
+    "react": ">=15.4.1"
   }
 }
