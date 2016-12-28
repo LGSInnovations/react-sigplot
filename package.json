@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Axios-Engineering/react-sigplot.git"
+    "url": "git+https://gitlab.lgsdirect.com/axios/react-sigplot.git"
   },
   "bugs": {
-    "url": "https://github.com/Axios-Engineering/react-sigplot/issues"
+    "url": "https://gitlab.lgsdirect.com/axios/react-sigplot/issues"
   },
   "licenses": [
     {
@@ -28,7 +28,7 @@
     "build": "npm run clean && npm run lint && babel src/* --out-dir dist/"
   },
   "dependencies": {
-    "sigplot": "git+ssh://git@github.com/axios-engineering/sigplot.git#develop-2.0"
+    "sigplot": "git+ssh://git@gitlab.lgsdirect.com/axios/sigplot.git#develop-2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
