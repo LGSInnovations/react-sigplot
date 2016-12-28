@@ -32,6 +32,7 @@
     "eslint-loader": "^1.6.1",
     "eslint-plugin-react": "^6.8.0",
     "react": "^15.4.1",
+    "sigplot": "git+ssh://git@github.com/axios-engineering/sigplot.git#develop-2.0",
     "webpack": "^1.13.3",
     "webpack-combine-loaders": "^2.0.3",
     "webpack-loaders": "^1.0.0"
