@@ -4,6 +4,7 @@ react-sigplot
 SigPlot wrapper component for ReactJS.
 
 Source: https://github.com/Axios-Engineering/react-sigplot
+
 Install: `npm install --save react-sigplot`
 
 ## What is it?
