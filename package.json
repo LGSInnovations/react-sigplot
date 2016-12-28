@@ -25,7 +25,8 @@
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
     "lint": "./node_modules/eslint/bin/eslint.js src/*",
-    "build": "npm run clean && npm run lint && babel src/* --out-dir dist/"
+    "build": "npm run clean && npm run lint && babel src/* --out-dir dist/",
+    "test": "jest"
   },
   "dependencies": {
     "sigplot": "git+ssh://git@gitlab.lgsdirect.com/axios/sigplot.git#develop-2.0"
