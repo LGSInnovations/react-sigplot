@@ -15,12 +15,7 @@
   "bugs": {
     "url": "https://gitlab.lgsdirect.com/axios/react-sigplot/issues"
   },
-  "licenses": [
-    {
-      "type": "LGPL",
-      "url": "https://www.gnu.org/licenses/lgpl.html"
-    }
-  ],
+  "license": "LGPL-3.0",
   "main": "./dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
