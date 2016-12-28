@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Sigplot, { Plot } from 'sigplot';
 
 export default class SigPlot extends Component {
   static propTypes = {
@@ -42,7 +43,7 @@ export default class SigPlot extends Component {
       websocket
     } = this.props;
     let subsize = data.length;
-    this.plot = new sigplot.Plot(this.element, settings);
+    this.plot = Plot(this.element, settings);
     if (file) {
       this.plot.overlay_href(file);
     } else if (websocket) {
