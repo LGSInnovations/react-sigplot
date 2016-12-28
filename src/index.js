@@ -1,35 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import Sigplot, { Plot } from 'sigplot';
+import { Plot } from 'sigplot';
 
 export default class SigPlot extends Component {
-  static propTypes = {
-    height: PropTypes.string,
-    width: PropTypes.string,
-    file: PropTypes.string,
-    websocket: PropTypes.string,
-    data: PropTypes.arrayOf(PropTypes.number),
-    raster: PropTypes.bool,
-    settings: PropTypes.object,
-    type: PropTypes.number,
-    xunits: PropTypes.number,
-    yunits: PropTypes.number
-  }
-
-  static defaultProps = {
-    height: 300,
-    width: 300,
-    type: 2000,
-    xdelta: 1,
-    xunits: 3, // Hz
-    yunits: 26, // 10*log
-    settings: {
-      all: true,
-      expand: true,
-      autol: 100,
-      autohide_panbars: true
-    }
-  }
-
   componentDidMount() {
     const {
       data,
@@ -40,10 +12,10 @@ export default class SigPlot extends Component {
       xunits,
       yunits,
       type,
-      websocket
+      websocket,
     } = this.props;
-    let subsize = data.length;
-    this.plot = Plot(this.element, settings);
+    const subsize = data.length;
+    this.plot = new Plot(this.element, settings);
     if (file) {
       this.plot.overlay_href(file);
     } else if (websocket) {
@@ -54,7 +26,7 @@ export default class SigPlot extends Component {
           type,
           xdelta,
           xunits,
-          subsize
+          subsize,
         });
         this.plot.push(this.pipeLayer, data);
       } else {
@@ -71,12 +43,8 @@ export default class SigPlot extends Component {
       data,
       file,
       raster,
-      xdelta,
-      xunits,
-      yunits,
-      websocket
+      websocket,
     } = nextProps;
-    let subsize = data.length;
     if (file) {
       this.plot.overlay_href(file);
     } else if (websocket) {
@@ -90,26 +58,44 @@ export default class SigPlot extends Component {
     }
     return false;
   }
-  
+
   render() {
     const {
       height,
-      width
+      width,
     } = this.props;
-    return ( <
-      div style = {
-        {
-          height,
-          width,
-          display: "inline-block"
-        }
-      }
-      ref = {
-        (element) => this.element = element
-      } >
-      <
-      /div>
-    );
+    return (<
+      div style={{ height, width, display: 'inline-block' }}
+      ref={element => this.element = element}
+    />);
   }
 }
 
+SigPlot.propTypes = {
+  height: PropTypes.string,
+  width: PropTypes.string,
+  file: PropTypes.string,
+  websocket: PropTypes.string,
+  data: PropTypes.arrayOf(PropTypes.number),
+  raster: PropTypes.bool,
+  settings: PropTypes.object,
+  type: PropTypes.number,
+  xunits: PropTypes.number,
+  yunits: PropTypes.number,
+  xdelta: PropTypes.number
+};
+
+SigPlot.defaultProps = {
+  height: 300,
+  width: 300,
+  type: 2000,
+  xdelta: 1,
+  xunits: 3, // Hz
+  yunits: 26, // 10*log
+  settings: {
+    all: true,
+    expand: true,
+    autol: 100,
+    autohide_panbars: true
+  }
+};
