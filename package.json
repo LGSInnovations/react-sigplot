@@ -24,20 +24,26 @@
   "main": "./dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
+    "lint": "./node_modules/eslint/bin/eslint.js src/*",
     "build": "npm run clean && npm run build:webpack",
     "build:webpack": "webpack --config webpack.config.js"
   },
   "dependencies": {
-    "eslint": "^3.11.1",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-react": "^6.8.0",
     "react": "^15.4.1",
     "sigplot": "git+ssh://git@github.com/axios-engineering/sigplot.git#develop-2.0",
     "webpack": "^1.13.3",
     "webpack-combine-loaders": "^2.0.3",
     "webpack-loaders": "^1.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint-loader": "^1.6.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0"
+  },
   "peerDependencies": {
     "react": ">=15.0.0"
   }
