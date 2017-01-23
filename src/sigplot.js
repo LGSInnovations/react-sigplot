@@ -2,61 +2,34 @@ import React, { Component, PropTypes } from 'react';
 import { Plot } from 'sigplot';
 
 export default class SigPlot extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  getChildContext() {
+    return {
+      plot: this.plot
+    };
+  }
+
   componentDidMount() {
     const {
       data,
       file,
       raster,
-      settings,
+      options,
       xdelta,
       xunits,
       yunits,
       type,
       websocket,
     } = this.props;
-    const subsize = data.length;
-    this.plot = new Plot(this.element, settings);
-    if (file) {
-      this.plot.overlay_href(file);
-    } else if (websocket) {
-      this.plot.overlay_websocket(websocket);
-    } else if (data) {
-      if (raster) {
-        this.pipeLayer = this.plot.overlay_pipe({
-          type,
-          xdelta,
-          xunits,
-          subsize,
-        });
-        this.plot.push(this.pipeLayer, data);
-      } else {
-        this.plotLayer = this.plot.overlay_array(data, {
-          xunits,
-          yunits
-        });
-      }
-    }
-  }
+    this.plot = new Plot(this.element, options);
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const {
-      data,
-      file,
-      raster,
-      websocket,
-    } = nextProps;
-    if (file) {
-      this.plot.overlay_href(file);
-    } else if (websocket) {
-      this.plot.overlay_websocket(websocket);
-    } else if (data) {
-      if (raster) {
-        this.plot.push(this.pipeLayer, data);
-      } else {
-        this.plot.reload(this.plotLayer, data);
-      }
-    }
-    return false;
+    // Have to trigger context tree, setting state does that.
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({ plot: this.plot });
   }
 
   render() {
@@ -64,21 +37,38 @@ export default class SigPlot extends Component {
       height,
       width,
     } = this.props;
-    return (<
-      div style={{ height, width, display: 'inline-block' }}
-      ref={element => this.element = element}
-    />);
+    const plot = this.plot;
+    const children = plot ?
+      React.Children.map(this.props.children, (child) => {
+        if (child) {
+          return React.cloneElement(child, { plot });
+        }
+        return null;
+      }) : null;
+
+    return (
+      <div
+        style={{ height, width, display: 'inline-block' }}
+        ref={element => this.element = element}
+      >
+        { children }
+      </div>);
   }
 }
 
+SigPlot.childContextTypes = {
+  plot: PropTypes.instanceOf(Plot)
+};
+
 SigPlot.propTypes = {
+  children: PropTypes.node,
   height: PropTypes.number,
   width: PropTypes.number,
   file: PropTypes.string,
   websocket: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.number),
   raster: PropTypes.bool,
-  settings: PropTypes.object,
+  options: PropTypes.object,
   type: PropTypes.number,
   xunits: PropTypes.number,
   yunits: PropTypes.number,
@@ -92,7 +82,7 @@ SigPlot.defaultProps = {
   xdelta: 1,
   xunits: 3, // Hz
   yunits: 26, // 10*log
-  settings: {
+  options: {
     all: true,
     expand: true,
     autol: 100,

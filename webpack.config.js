@@ -2,7 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 module.exports = {
   entry: {
-    'react-sigplot': './src/index',
+    'react-sigplot': ['./src/index'],
+    'example': './example'
   },
   output: {
       path: (__dirname, 'dist'),
