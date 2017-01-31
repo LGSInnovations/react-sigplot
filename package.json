@@ -20,13 +20,15 @@
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
     "lint": "./node_modules/eslint/bin/eslint.js src/*",
-    "build": "npm run clean && npm run lint && babel src/* --out-dir dist/",
+    "build": "npm run clean && npm run lint && ./node_modules/webpack/bin/webpack.js --progress",
     "test": "jest"
   },
   "dependencies": {
     "sigplot": "git+ssh://git@gitlab.lgsdirect.com/axios/sigplot.git#develop-2.0"
   },
   "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.1",
     "babel-jest": "^18.0.0",
@@ -40,7 +42,8 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "jest": "^18.0.0",
-    "react-test-renderer": "^15.4.1"
+    "react-test-renderer": "^15.4.1",
+    "webpack": "^1.14.0"
   },
   "peerDependencies": {
     "react": ">=15.4.1"
