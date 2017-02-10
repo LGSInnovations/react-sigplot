@@ -17,6 +17,10 @@
   },
   "license": "LGPL-3.0",
   "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
     "lint": "./node_modules/eslint/bin/eslint.js src/*",
