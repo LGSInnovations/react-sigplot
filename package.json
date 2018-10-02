@@ -2,7 +2,7 @@
   "name": "react-sigplot",
   "description": "React wrapper for SigPlot",
   "version": "0.0.2",
-  "homepage": "http://lgsinnovations.gitlab.com/axios/react-sigplot",
+  "homepage": "http://gitlab.lgsinnovations.com/axios/react-sigplot",
   "author": {
     "name": "LGS Innovations",
     "email": "sigplot@lgsinnovations.com",
