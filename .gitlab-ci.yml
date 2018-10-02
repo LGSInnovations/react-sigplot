@@ -1,16 +1,28 @@
-image: node:4.2.2
+image: node:10.1.0
 
 cache:
   paths:
   - node_modules/
+  - .yarn
 
 stages:
+  - build
   - test
 
-test_react_sigplot:
-  stage: test
+Build:
+  stage: build
+  tags: node
+  before_script:
+   - yarn config set cache-folder .yarn
+   - yarn install
   script:
-   - npm install
-   - npm test
-  tags:
-    - docker
+   - yarn run build
+
+Test:
+  stage: test
+  tags: node
+  before_script:
+   - yarn config set cache-folder .yarn
+   - yarn install
+  script:
+   - yarn test
