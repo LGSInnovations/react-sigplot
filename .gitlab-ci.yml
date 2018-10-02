@@ -1,0 +1,16 @@
+image: node:4.2.2
+
+cache:
+  paths:
+  - node_modules/
+
+stages:
+  - test
+
+test_react_sigplot:
+  stage: test
+  script:
+   - npm install
+   - npm test
+  tags:
+    - docker
