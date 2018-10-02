@@ -3,7 +3,7 @@ react-sigplot
 
 SigPlot wrapper component for ReactJS.
 
-Source: https://github.com/Axios-Engineering/react-sigplot
+Source: https://lgsinnovations.gitlab.com/axios/react-sigplot
 
 Install: `npm install --save react-sigplot`
 
@@ -19,7 +19,9 @@ Provides a component that wraps the SigPlot library.
 
 ```js
 // Default plot an array
-<SigPlot data=[1, 2, 3, 4, 5] />
+<SigPlot options={{autol:1}}>
+  <ArrayLayer data={this.state.data}/>
+</SigPlot>
 ```
 
 ## Example Preview
