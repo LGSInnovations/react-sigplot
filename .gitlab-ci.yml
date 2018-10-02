@@ -15,10 +15,12 @@ before_script:
 
 build:
   stage: build
-  tags: node
+  tags:
+    - node
   script: yarn run build
 
 test:
   stage: test
-  tags: node
+  tags:
+    - node
   script: yarn test
