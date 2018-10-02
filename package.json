@@ -2,18 +2,18 @@
   "name": "react-sigplot",
   "description": "React wrapper for SigPlot",
   "version": "0.0.2",
-  "homepage": "http://github.com/Axios-Engineering/react-sigplot",
+  "homepage": "http://lgsinnovations.github.com/axios/react-sigplot",
   "author": {
-    "name": "Axios Engineering",
-    "email": "sigplot@axiosengineering.com",
-    "url": "http://www.axiosengineering.com"
+    "name": "LGS Innovations",
+    "email": "sigplot@lgsinnovations.com",
+    "url": "http://www.lgsinnovations.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.lgsdirect.com/axios/react-sigplot.git"
+    "url": "git+https://gitlab.lgsinnovations.com/axios/react-sigplot.git"
   },
   "bugs": {
-    "url": "https://gitlab.lgsdirect.com/axios/react-sigplot/issues"
+    "url": "https://gitlab.lgsinnovations.com/axios/react-sigplot/issues"
   },
   "license": "Apache-2.0",
   "main": "./dist/react-sigplot.js",
@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "sigplot": "git+ssh://git@gitlab.lgsdirect.com/axios/sigplot.git#develop-2.0"
+    "sigplot": "sigplot"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
