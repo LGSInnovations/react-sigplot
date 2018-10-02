@@ -6,19 +6,19 @@ module.exports = {
     'example': './example'
   },
   output: {
-      path: (__dirname, 'dist'),
+      path: __dirname + '/dist',
       filename: '[name].js',
       library: 'react-sigplot',
       libraryTarget: 'umd'
   },
   devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         test: /.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: { loader: 'babel-loader' }
       }
     ]
-  },
+  }
 };
