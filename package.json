@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://gitlab.lgsdirect.com/axios/react-sigplot/issues"
   },
-  "license": "LGPL-3.0",
+  "license": "Apache-2.0",
   "main": "./dist/react-sigplot.js",
   "files": [
     "dist",
