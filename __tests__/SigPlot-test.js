@@ -1,19 +1,22 @@
 import React from 'react';
-import SigPlot from '../src/index.js';
-import renderer from 'react-test-renderer';
+import { expect } from 'chai';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import toJson from 'enzyme-to-json';
+import { SigPlot } from '../src/index.js';
 
-test('SigPlot renders without data', () => {
-    const component = renderer.create(
-        <SigPlot data={[]} />
-    );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-});
+configure({ adapter: new Adapter() })
 
-test('SigPlot renders data from array', () => {
-    const component = renderer.create(
+describe('<SigPlot />', () => {
+  it('renders with empty data prop', () => {
+    const component = mount(<SigPlot data={[]} />);
+    expect(toJson(component)).toMatchSnapshot();
+  });
+
+  it('SigPlot renders data from array', () => {
+    const component = mount(
         <SigPlot data={[1, 2, 3, 4]} />
     );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(toJson(component)).toMatchSnapshot();
+  });
 });
