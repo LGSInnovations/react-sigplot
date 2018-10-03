@@ -1,16 +1,10 @@
 image: node:10.1.0
 
-cache:
-  paths:
-  - node_modules/
-  - .yarn
-
 stages:
   - build
   - test
 
 before_script:
-  - yarn config set cache-folder .yarn
   - yarn install
 
 build:
