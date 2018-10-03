@@ -22,6 +22,7 @@ describe('<SigPlot />', () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
+    expect(component.props().children).to.be.undefined;
   });
 
   it('renders with no child layer with custom height and width', () => {
@@ -38,6 +39,7 @@ describe('<SigPlot />', () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
+    expect(component.props().children).to.be.undefined;
   });
 
   it('renders with no child layer with custom options and custom height and width', () => {
@@ -54,6 +56,7 @@ describe('<SigPlot />', () => {
     expect(component.props().options.expand).to.equal(false);
     expect(component.props().options.autol).to.equal(1);
     expect(component.props().options.autohide_panbars).to.equal(false);
+    expect(component.props().children).to.be.undefined;
   });
 
   it('SigPlot renders with 1D ArrayLayer with no data', () => {
@@ -71,6 +74,7 @@ describe('<SigPlot />', () => {
     );
     expect(component.props().width).to.equal(300);
     expect(component.props().height).to.equal(300);
+    expect(component.props().children).to.have.lengthOf(1);
     expect(component.props().children[0].props().data).to.equal(oneDimensionalData);
   });
 
