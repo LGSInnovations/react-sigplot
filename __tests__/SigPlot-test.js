@@ -94,6 +94,26 @@ describe('<SigPlot />', () => {
     expect(toJson(component)).toMatchSnapshot();
   });
 
+  it('SigPlot renders with 2D ArrayLayer with no data', () => {
+    const options = {
+      all: true,
+      expand: true,
+      autol: 100,
+      autohide_panbars: true,
+    };
+    let random = [];
+    for (let i = 0; i <= 1000; i += 1) {
+        random.push(Math.random());
+    }
+    const oneDimensionalData = random;
+    const component = mount(
+        <SigPlot options={{autol: 1}}>
+          <ArrayLayer data={oneDimensionalData} />
+        </SigPlot>
+    );
+    expect(toJson(component)).toMatchSnapshot();
+  });
+
   it('SigPlot renders with 2D ArrayLayer with data', () => {
     const options = {
       all: true,
