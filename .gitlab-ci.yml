@@ -5,12 +5,12 @@ stages:
   - test
 
 before_script:
-  - yarn install
+  - npm install
 
 build:
   stage: build
-  script: yarn run build
+  script: npm run build
 
 test:
   stage: test
-  script: yarn test
+  script: npm test
