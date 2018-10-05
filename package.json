@@ -30,6 +30,9 @@
   "dependencies": {
     "sigplot": "^2.0.0-rc6"
   },
+  "jest": {
+    "setupFiles": ["jest-canvas-mock"]
+  },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
@@ -51,6 +54,7 @@
     "eslint-plugin-react": "^6.10.3",
     "file-loader": "^2.0.0",
     "jest": "^23.6.0",
+    "jest-canvas-mock": "^1.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
