@@ -3,7 +3,12 @@ import { expect } from 'chai';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
-import { SigPlot, ArrayLayer, PipeLayer } from '../src/index.js';
+import {
+  SigPlot,
+  ArrayLayer,
+  PipeLayer,
+  HrefLayer
+} from '../src/index.js';
 
 configure({ adapter: new Adapter() })
 
@@ -214,7 +219,7 @@ describe('<SigPlot />', () => {
     for (let i = 0; i <= 1000; i += 1) {
         random.push(Math.random());
     }
-    const oneDimensionalData = random;
+    const twoDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
           <ArrayLayer
@@ -223,7 +228,14 @@ describe('<SigPlot />', () => {
           />
         </SigPlot>
     );
-    expect(toJson(component)).toMatchSnapshot();
+    expect(component.props().width).to.equal(300);
+    expect(component.props().height).to.equal(300);
+    expect(component.props().options.all).to.equal(true);
+    expect(component.props().options.expand).to.equal(true);
+    expect(component.props().options.autol).to.equal(100);
+    expect(component.props().options.autohide_panbars).to.equal(true);
+    expect(component.props().children).to.be.an('object');
+    expect(component.props().children.props.data).to.equal(twoDimensionalData);
   });
 
   it('SigPlot renders with 1D PipeLayer with no data', () => {
@@ -234,16 +246,20 @@ describe('<SigPlot />', () => {
       autohide_panbars: true,
     };
     let random = [];
-    for (let i = 0; i <= 1000; i += 1) {
-        random.push(Math.random());
-    }
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <PipeLayer data={oneDimensionalData} />
         </SigPlot>
     );
-    expect(toJson(component)).toMatchSnapshot();
+    expect(component.props().width).to.equal(300);
+    expect(component.props().height).to.equal(300);
+    expect(component.props().options.all).to.equal(true);
+    expect(component.props().options.expand).to.equal(true);
+    expect(component.props().options.autol).to.equal(100);
+    expect(component.props().options.autohide_panbars).to.equal(true);
+    expect(component.props().children).to.be.an('object');
+    expect(component.props().children.props.data).to.equal(twoDimensionalData);
   });
 
   it('SigPlot renders with 1D PipeLayer with data', () => {
@@ -260,7 +276,7 @@ describe('<SigPlot />', () => {
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <PipeLayer data={oneDimensionalData} />
         </SigPlot>
     );
     expect(toJson(component)).toMatchSnapshot();
@@ -280,7 +296,7 @@ describe('<SigPlot />', () => {
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <PipeLayer data={oneDimensionalData} />
         </SigPlot>
     );
     expect(toJson(component)).toMatchSnapshot();
@@ -300,13 +316,13 @@ describe('<SigPlot />', () => {
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <PipeLayer data={oneDimensionalData} />
         </SigPlot>
     );
     expect(toJson(component)).toMatchSnapshot();
   });
 
-  it('SigPlot renders with 1D FileLayer with no file', () => {
+  it('SigPlot renders with 1D HrefLayer with no file', () => {
     const options = {
       all: true,
       expand: true,
@@ -320,13 +336,13 @@ describe('<SigPlot />', () => {
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <HrefLayer data={oneDimensionalData} />
         </SigPlot>
     );
     expect(toJson(component)).toMatchSnapshot();
   });
 
-  it('SigPlot renders with 1D FileLayer with valid href', () => {
+  it('SigPlot renders with 1D HrefLayer with valid href', () => {
     const options = {
       all: true,
       expand: true,
@@ -340,13 +356,13 @@ describe('<SigPlot />', () => {
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <HrefLayer data={oneDimensionalData} />
         </SigPlot>
     );
     expect(toJson(component)).toMatchSnapshot();
   });
 
-  it('SigPlot renders with 1D FileLayer with 2 valid hrefs', () => {
+  it('SigPlot renders with 1D HrefLayer with 2 valid hrefs', () => {
     const options = {
       all: true,
       expand: true,
@@ -360,13 +376,13 @@ describe('<SigPlot />', () => {
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <HrefLayer data={oneDimensionalData} />
         </SigPlot>
     );
     expect(toJson(component)).toMatchSnapshot();
   });
 
-  it('SigPlot renders with 2D FileLayer with valid href', () => {
+  it('SigPlot renders with 2D HrefLayer with valid href', () => {
     const options = {
       all: true,
       expand: true,
@@ -380,7 +396,7 @@ describe('<SigPlot />', () => {
     const oneDimensionalData = random;
     const component = mount(
         <SigPlot options={options}>
-          <ArrayLayer data={oneDimensionalData} />
+          <HrefLayer data={oneDimensionalData} />
         </SigPlot>
     );
     expect(toJson(component)).toMatchSnapshot();
