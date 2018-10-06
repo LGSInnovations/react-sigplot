@@ -14,6 +14,43 @@ Provides a component that wraps the SigPlot library.
 
 ## Properties
 
+### \<SigPlot />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`height`|`number`|300|Height of the `div` wrapping SigPlot|
+|`width`|`number`|300|Width of the `div` wrapping SigPlot|
+|`options`|`object`|`{all: true, expand: true, autol: 100, autohide_panbars: true}`|SigPlot `Plot` options|
+
+### \<ArrayLayer />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`data`|`array(number)`|`undefined`|Array of values to plot|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+
+### \<PipeLayer />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`data`|`array(number)`|`undefined`|Array of values to plot|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+
+### \<HrefLayer />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`href`|`string`|`''`|URL or path to a bluefile or MATLAB file|
+|`onload`|`function`|`null`|Function that will get executed when file is loaded|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+
+### \<WebsocketLayer />
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`wsurl`|`string`|`''`|URL to the websocket server|
+|`overrides`|`object`|`undefined`|SigPlot `Layer` overrides|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+
 ## Usage
 
 ### Basic
