@@ -5,7 +5,7 @@ import Layer from './layer';
 export default class WebsocketLayer extends Layer {
   componentDidMount() {
     const { wsurl, overrides, options } = this.props;
-    this.layer = this.plot.overlay_websocket(wsurl, onload, options);
+    this.layer = this.plot.overlay_websocket(wsurl, overrides, options);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -15,12 +15,12 @@ export default class WebsocketLayer extends Layer {
   }
 }
 
-HrefLayer.propTypes = {
+WebsocketLayer.propTypes = {
   wsurl: PropTypes.string,
   overrides: PropTypes.func,
   options: PropTypes.object,
 };
 
-HrefLayer.defaultProps = {
+WebsocketLayer.defaultProps = {
   wsurl: '',
 };
