@@ -6,6 +6,7 @@ services:
   - docker
 
 before_install:
+  - apt-get install libgif-dev
   - rm -rf dist/*
   - npm install -q
 
