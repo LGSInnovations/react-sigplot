@@ -11,7 +11,8 @@ export default class Layer extends Component {
   }
 
   get plot() {
-    return this.context.plot;
+    const { plot } = this.context;
+    return plot;
   }
 
   render() {
@@ -24,6 +25,6 @@ Layer.contextTypes = {
 };
 
 Layer.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.number),
-  options: PropTypes.object
+  data: PropTypes.arrayOf(PropTypes.number), // eslint-disable-line react/no-unused-prop-types
+  options: PropTypes.object // eslint-disable-line react/no-unused-prop-types
 };

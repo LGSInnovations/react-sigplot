@@ -20,6 +20,7 @@ export default class SigPlot extends Component {
 
     // Have to trigger context tree, setting state does that.
     // eslint-disable-next-line react/no-did-mount-set-state
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ plot: this.plot });
   }
 
@@ -27,10 +28,11 @@ export default class SigPlot extends Component {
     const {
       height,
       width,
+      children: propChildren,
     } = this.props;
-    const plot = this.plot;
-    const children = plot ?
-      React.Children.map(this.props.children, (child) => {
+    const { plot } = this;
+    const children = plot
+      ? React.Children.map(propChildren, (child) => {
         if (child) {
           return React.cloneElement(child, { plot });
         }

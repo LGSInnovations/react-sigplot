@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Plot } from 'sigplot';
+import React from 'react';
 import Layer from './layer';
 
 export default class ArrayLayer extends Layer {
