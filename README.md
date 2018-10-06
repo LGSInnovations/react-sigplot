@@ -43,7 +43,7 @@ Provides a component that wraps the SigPlot library.
 If you run
 
 ```
-$ webpack
+$ npm run build
 $ python -m SimpleHTTPServer 8888
 ```
 
