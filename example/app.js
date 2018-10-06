@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { SigPlot, ArrayLayer, PipeLayer } from '../src';
+import { SigPlot, ArrayLayer, PipeLayer, HrefLayer } from '../src';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rasterData: []
+      rasterData: [],
+      href: "http://sigplot.lgsinnovations.com/dat/penny.prm"
     };
   }
 
@@ -28,6 +29,10 @@ export default class App extends Component {
         <SigPlot>
           <PipeLayer options={{type: 2000, subsize: 1000}} 
             data={this.state.rasterData}/>
+        </SigPlot>
+        <SigPlot>
+          <HrefLayer
+            href={this.state.href}/>
         </SigPlot>
       </div>
     );
