@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Plot } from 'sigplot';
 import Layer from './layer';
 
 export default class HrefLayer extends Layer {
   componentDidMount() {
-    this.layer = this.plot.overlay_array(this.props.data, this.props.options);
+    const { href, onload, options } = this.props;
+    this.layer = this.plot.overlay_href(href, onload, options);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -14,3 +14,14 @@ export default class HrefLayer extends Layer {
     }
   }
 }
+
+HrefLayer.propTypes = {
+  href: PropTypes.string,
+  onload: PropTypes.func,
+  options: PropTypes.object,
+};
+
+HrefLayer.defaultProps = {
+  href: '',
+  onload: null,
+};
