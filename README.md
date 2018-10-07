@@ -1,5 +1,6 @@
 react-sigplot
 ===============
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Build Status](https://travis-ci.org/LGSInnovations/react-sigplot.svg?branch=master)](https://travis-ci.org/LGSInnovations/react-sigplot) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](.github/CONTRIBUTING.md#pull-requests) [![npm version](https://badge.fury.io/js/react-sigplot.svg)](https://badge.fury.io/js/react-sigplot)
 
 SigPlot wrapper component for ReactJS.
 
@@ -12,6 +13,43 @@ Install: `npm install --save react-sigplot`
 Provides a component that wraps the SigPlot library.
 
 ## Properties
+
+### \<SigPlot />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`height`|`number`|300|Height of the `div` wrapping SigPlot|
+|`width`|`number`|300|Width of the `div` wrapping SigPlot|
+|`options`|`object`|`{all: true, expand: true, autol: 100, autohide_panbars: true}`|SigPlot `Plot` options|
+
+### \<ArrayLayer />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`data`|`array(number)`|`undefined`|Array of values to plot|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+
+### \<PipeLayer />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`data`|`array(number)`|`undefined`|Array of values to plot|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+
+### \<HrefLayer />
+
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`href`|`string`|`''`|URL or path to a bluefile or MATLAB file|
+|`onload`|`function`|`null`|Function that will get executed when file is loaded|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+
+### \<WebsocketLayer />
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`wsurl`|`string`|`''`|URL to the websocket server|
+|`overrides`|`object`|`undefined`|SigPlot `Layer` overrides|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
 
 ## Usage
 

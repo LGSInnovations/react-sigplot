@@ -1,11 +1,12 @@
 language: node_js
 node_js:
-  - "6.11.4"
+  - "10.1.0"
 
 services:
   - docker
 
 before_install:
+  - sudo apt-get install libgif-dev
   - rm -rf dist/*
   - npm install -q
 

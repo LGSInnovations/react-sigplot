@@ -2,18 +2,18 @@
   "name": "react-sigplot",
   "description": "React wrapper for SigPlot",
   "version": "0.0.2",
-  "homepage": "http://gitlab.lgsinnovations.com/axios/react-sigplot",
+  "homepage": "https://github.com/lgsinnovations/react-sigplot",
   "author": {
     "name": "LGS Innovations",
     "email": "sigplot@lgsinnovations.com",
-    "url": "http://www.lgsinnovations.com"
+    "url": "https://www.lgsinnovations.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.lgsinnovations.com/axios/react-sigplot.git"
+    "url": "git+https://github.com/lgsinnovations/react-sigplot.git"
   },
   "bugs": {
-    "url": "https://gitlab.lgsinnovations.com/axios/react-sigplot/issues"
+    "url": "https://github.com/lgsinnovations/react-sigplot/issues"
   },
   "license": "Apache-2.0",
   "main": "./dist/react-sigplot.js",
