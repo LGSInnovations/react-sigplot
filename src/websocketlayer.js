@@ -9,8 +9,22 @@ export default class WebsocketLayer extends Layer {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
-      this.plot.reload(this.layer, nextProps.data);
+    const {
+      wsurl: oldWsurl,
+      options: oldOptions,
+    } = this.props;
+
+    const {
+      wsurl: newWsurl,
+      overrides: newOverrides,
+      options: newOptions,
+    } = nextProps;
+
+    // we only care if `wsurl` or `options` changes;
+    if (newWsurl !== oldWsurl) {
+      this.plot.overlay_websocket(newWsurl, newOverrides, newOptions);
+    } else if (newOptions !== oldOptions) {
+      this.plot.change_settings(newOptions);
     }
   }
 }

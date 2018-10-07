@@ -9,8 +9,22 @@ export default class HrefLayer extends Layer {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
-      this.plot.reload(this.layer, nextProps.data);
+    const {
+      href: oldHref,
+      options: oldOptions,
+    } = this.props;
+
+    const {
+      href: newHref,
+      onload: newOnload,
+      options: newOptions,
+    } = nextProps;
+
+    // we only care if `href` or `options` changes;
+    if (newHref !== oldHref) {
+      this.plot.overlay_href(newHref, newOnload, newOptions);
+    } else if (newOptions !== oldOptions) {
+      this.plot.change_settings(newOptions);
     }
   }
 }
