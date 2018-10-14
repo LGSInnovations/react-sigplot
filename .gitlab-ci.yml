@@ -5,12 +5,44 @@ stages:
   - test
 
 before_script:
-  - npm install
+- npm install
 
-build:
+build_node491:
+  image: node:4.9.1
   stage: build
   script: npm run build
 
-test:
+build_node6144:
+  image: node:6.14.4
+  stage: build
+  script: npm run build
+
+build_node8120:
+  image: node:8.12.0
+  stage: build
+  script: npm run build
+
+build_node10110:
+  image: node:10.11.0
+  stage: build
+  script: npm run build
+
+test_node491:
+  image: node:4.9.1
+  stage: test
+  script: npm test
+
+test_node6144:
+  image: node:6.14.4
+  stage: test
+  script: npm test
+
+test_node8120:
+  image: node:8.12.0
+  stage: test
+  script: npm test
+
+test_node10110:
+  image: node:10.11.0
   stage: test
   script: npm test
