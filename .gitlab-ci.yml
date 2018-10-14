@@ -7,11 +7,6 @@ stages:
 before_script:
 - npm install
 
-build_node491:
-  image: node:4.9.1
-  stage: build
-  script: npm run build
-
 build_node6144:
   image: node:6.14.4
   stage: build
@@ -26,11 +21,6 @@ build_node10110:
   image: node:10.11.0
   stage: build
   script: npm run build
-
-test_node491:
-  image: node:4.9.1
-  stage: test
-  script: npm test
 
 test_node6144:
   image: node:6.14.4
