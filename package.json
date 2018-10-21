@@ -25,7 +25,7 @@
     "clean": "rm -rf ./dist && mkdir ./dist",
     "lint": "./node_modules/eslint/bin/eslint.js src/*",
     "build": "npm run clean && npm run lint && ./node_modules/webpack/bin/webpack.js --progress",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "sigplot": "^2.0.0-rc6"
