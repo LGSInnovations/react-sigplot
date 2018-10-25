@@ -5,6 +5,7 @@ import Layer from './layer';
 export default class HrefLayer extends Layer {
   componentDidMount() {
     const { href, onload, options } = this.props;
+    this.plot.deoverlay();
     this.layer = this.plot.overlay_href(href, onload, options);
   }
 
@@ -22,6 +23,7 @@ export default class HrefLayer extends Layer {
 
     // we only care if `href` or `options` changes;
     if (newHref !== oldHref) {
+      this.plot.deoverlay();
       this.plot.overlay_href(newHref, newOnload, newOptions);
     } else if (newOptions !== oldOptions) {
       this.plot.change_settings(newOptions);
