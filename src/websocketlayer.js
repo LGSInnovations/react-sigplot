@@ -5,6 +5,7 @@ import Layer from './layer';
 export default class WebsocketLayer extends Layer {
   componentDidMount() {
     const { wsurl, overrides, options } = this.props;
+    this.plot.deoverlay();
     this.layer = this.plot.overlay_websocket(wsurl, overrides, options);
   }
 
@@ -22,6 +23,7 @@ export default class WebsocketLayer extends Layer {
 
     // we only care if `wsurl` or `options` changes;
     if (newWsurl !== oldWsurl) {
+      this.plot.deoverlay();
       this.plot.overlay_websocket(newWsurl, newOverrides, newOptions);
     } else if (newOptions !== oldOptions) {
       this.plot.change_settings(newOptions);
