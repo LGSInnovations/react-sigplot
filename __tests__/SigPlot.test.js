@@ -9,7 +9,8 @@ import {
   SigPlot,
   ArrayLayer,
   PipeLayer,
-  HrefLayer
+  HrefLayer,
+  WebsocketLayer
 } from '../src/index.js';
 
 configure({ adapter: new Adapter() })
@@ -666,9 +667,59 @@ describe('<PipeLayer />', () => {
       expect(component.instance().plot._Gx.lyr[0].hcb.dview[i]).to.equal(tmp2[i]);
     }
   });
+
+  it('doesn\'t replot the same data on data prop change', () => {
+    const element = global.document.createElement("div");
+    const context = { plot: new Plot(element, {}) };
+
+    let random = [];
+    for (let i = 0; i <= 1000; i += 1) {
+        random.push(i * 10);
+    }
+
+    const options = {framesize: 1000, type: 2000, subsize: 1000};
+    const component = mount(
+      <PipeLayer data={random} options={options} />,
+      { context }
+    ); 
+
+    expect(component.props().data).to.equal(random);
+    expect(component.instance().plot._Gx.all).to.equal(false);
+    expect(component.instance().plot._Gx.expand).to.equal(false);
+    expect(component.instance().plot._Gx.autol).to.equal(-1);
+    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
+    expect(component.instance().plot._Gx.lyr[0].hcb.subsize).to.equal(1000);
+    expect(component.instance().plot._Gx.lyr[0].hcb.type).to.equal(2000);
+
+    component.setProps({data: random});
+    expect(component.props().data).to.equal(random);
+    expect(component.instance().plot._Gx.all).to.equal(false);
+    expect(component.instance().plot._Gx.expand).to.equal(false);
+    expect(component.instance().plot._Gx.autol).to.equal(-1);
+    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
+    expect(component.instance().plot._Gx.lyr[0].hcb.subsize).to.equal(1000);
+    expect(component.instance().plot._Gx.lyr[0].hcb.type).to.equal(2000);
+    
+    const tmp = new Float64Array(1000);
+    for (let i = 0; i < 1000; i++) {
+      expect(component.instance().plot._Gx.lyr[0].hcb.dview[i]).to.equal(tmp[i]);
+    }
+  });
 });
 
 describe('<HrefLayer />', () => {
+  beforeEach(() => {
+    sinon.spy(Plot.prototype, 'deoverlay');
+    sinon.spy(Plot.prototype, 'overlay_href');
+    sinon.spy(Plot.prototype, 'change_settings');
+  });
+
+  afterEach(() => {
+    Plot.prototype.deoverlay.restore();
+    Plot.prototype.overlay_href.restore();
+    Plot.prototype.change_settings.restore();
+  });
+
   it('reloads plot on href prop change', () => {
     const element = global.document.createElement("div");
     const context = { plot: new Plot(element, {}) };
@@ -680,23 +731,21 @@ describe('<HrefLayer />', () => {
 
     expect(component.props().href).to.equal(hrefOne);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(component.instance().plot._Gx.all).to.equal(false);
-    expect(component.instance().plot._Gx.expand).to.equal(false);
-    expect(component.instance().plot._Gx.autol).to.equal(-1);
-    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.empty;
-    expect(component.instance().plot._Gx.lyr[0].hcb.file_name).to.equal(hrefTwo);
+    expect(Plot.prototype.deoverlay).to.have.property('callCount', 1);
+    expect(Plot.prototype.deoverlay.getCall(0).args).to.be.empty;
+    expect(Plot.prototype.overlay_href).to.have.property('callCount', 1);
+    expect(Plot.prototype.overlay_href.getCall(0).args).to.have.length(3);
+    expect(Plot.prototype.overlay_href.getCall(0).args[0]).to.equal(hrefOne);
 
     const hrefTwo = "dat/penny.prm";
     component.setProps({href: hrefTwo});
     expect(component.props().href).to.equal(hrefTwo);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(component.instance().plot._Gx.all).to.equal(false);
-    expect(component.instance().plot._Gx.expand).to.equal(false);
-    expect(component.instance().plot._Gx.autol).to.equal(-1);
-    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.empty;
-    expect(component.instance().plot._Gx.lyr[0].hcb.file_name).to.equal(hrefTwo);
+    expect(Plot.prototype.deoverlay).to.have.property('callCount', 2);
+    expect(Plot.prototype.deoverlay.getCall(1).args).to.be.empty;
+    expect(Plot.prototype.overlay_href).to.have.property('callCount', 2);
+    expect(Plot.prototype.overlay_href.getCall(1).args).to.have.length(3);
+    expect(Plot.prototype.overlay_href.getCall(1).args[0]).to.equal(hrefTwo);
   });
 
   it('changes settings on options prop change', () => {
@@ -710,12 +759,11 @@ describe('<HrefLayer />', () => {
 
     expect(component.props().href).to.equal(hrefOne);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(component.instance().plot._Gx.all).to.equal(false);
-    expect(component.instance().plot._Gx.expand).to.equal(false);
-    expect(component.instance().plot._Gx.autol).to.equal(-1);
-    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.empty;
-    expect(component.instance().plot._Gx.lyr[0].hcb.file_name).to.equal(hrefOne);
+    expect(Plot.prototype.deoverlay).to.have.property('callCount', 1);
+    expect(Plot.prototype.deoverlay.getCall(0).args).to.be.empty;
+    expect(Plot.prototype.overlay_href).to.have.property('callCount', 1);
+    expect(Plot.prototype.overlay_href.getCall(0).args).to.have.length(3);
+    expect(Plot.prototype.overlay_href.getCall(0).args[0]).to.equal(hrefOne);
 
     const options = {
       xmin: 0,
@@ -724,83 +772,134 @@ describe('<HrefLayer />', () => {
     component.setProps({options: options});
     expect(component.props().href).to.equal(hrefOne);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(component.instance().plot._Gx.all).to.equal(false);
-    expect(component.instance().plot._Gx.expand).to.equal(false);
-    expect(component.instance().plot._Gx.autol).to.equal(-1);
-    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.not.empty;
-    expect(component.instance().plot._Gx.lyr[0].options).to.equal(options);
-    expect(component.instance().plot._Gx.lyr[0].hcb.file_name).to.equal(hrefOne);
+    expect(Plot.prototype.deoverlay).to.have.property('callCount', 1);
+    expect(Plot.prototype.deoverlay.getCall(0).args).to.be.empty;
+    expect(Plot.prototype.overlay_href).to.have.property('callCount', 1);
+    expect(Plot.prototype.overlay_href.getCall(0).args).to.have.length(3);
+    expect(Plot.prototype.overlay_href.getCall(0).args[0]).to.equal(hrefOne);
+    expect(Plot.prototype.change_settings).to.have.property('callCount', 2);
+    expect(Plot.prototype.change_settings.getCall(1).args).to.have.length(1);
+    expect(Plot.prototype.change_settings.getCall(1).args[0]).to.equal(options);
   });
 });
 
 describe('<WebsocketLayer />', () => {
-  it('reloads plot on wsurl prop change', () => {
-    const options = {};
-    const element = global.document.createElement("div");
-    const context = { plot: new Plot(element, options) };
+  beforeEach(() => {
+    sinon.spy(Plot.prototype, 'deoverlay');
+    sinon.spy(Plot.prototype, 'overlay_websocket');
+    sinon.spy(Plot.prototype, 'change_settings');
+  });
 
-    const websocketURL = "";
+  afterEach(() => {
+    Plot.prototype.deoverlay.restore();
+    Plot.prototype.overlay_websocket.restore();
+    Plot.prototype.change_settings.restore();
+  });
+
+  it('doesn\'t reload plot on same wsurl change', () => {
+    const options = {framesize: 1000};
+    const element = global.document.createElement("div");
+    const context = { plot: new Plot(element, {}) };
+
+    const websocketURL = "ws://0.0.0.0";
     const component = mount(
-      <WebsocketLayer wsurl={websocketURL} />,
+      <WebsocketLayer wsurl={websocketURL} options={options}/>,
       { context }
     ); 
 
-    expect(component.props().data).to.equal(oneDimensionalData);
+    expect(component.props().wsurl).to.equal(websocketURL);
+    expect(component.props().options).to.equal(options);
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(false);
     expect(component.instance().plot._Gx.expand).to.equal(false);
     expect(component.instance().plot._Gx.autol).to.equal(-1);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.empty;
-    expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(oneDimensionalData.length);
 
-    let random2 = [];
-    for (let i = 0; i <= 1000; i += 1) {
-        random2.push(i * 10);
-    }
-    const oneDimensionalData2 = random2;
+    component.setProps({wsurl: websocketURL});
+    expect(component.props().wsurl).to.equal(websocketURL);
+  });
 
-    component.setProps({data: random2});
-    expect(component.props().data).to.equal(oneDimensionalData2);
+  it('reloads plot on wsurl prop change', () => {
+    const options = {framesize: 1000};
+    const element = global.document.createElement("div");
+    const context = { plot: new Plot(element, {}) };
+
+    const websocketURL = "ws://0.0.0.0";
+    const component = mount(
+      <WebsocketLayer wsurl={websocketURL} options={options}/>,
+      { context }
+    ); 
+
+    expect(component.props().wsurl).to.equal(websocketURL);
+    expect(component.props().options).to.equal(options);
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(false);
     expect(component.instance().plot._Gx.expand).to.equal(false);
     expect(component.instance().plot._Gx.autol).to.equal(-1);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.empty;
-    expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(oneDimensionalData2.length);
+
+    component.setProps({wsurl: websocketURL});
+    expect(component.props().wsurl).to.equal(websocketURL);
+
+    const websocketURL2 = "ws://0.0.0.0/foo";
+
+    component.setProps({wsurl: websocketURL2});
+    expect(component.props().wsurl).to.equal(websocketURL2);
+    expect(component.props().options).to.equal(options);
+    expect(component.instance().plot).to.not.be.undefined;
+    expect(component.instance().plot._Gx.all).to.equal(false);
+    expect(component.instance().plot._Gx.expand).to.equal(false);
+    expect(component.instance().plot._Gx.autol).to.equal(-1);
+    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
+  });
+
+  it('throws an error on empty URL', () => {
+    expect(() => {
+      const element = global.document.createElement("div");
+      const options = {};
+      const context = { plot: new Plot(element, options) };
+
+      const websocketURL = "";
+      const component = mount(
+        <WebsocketLayer wsurl={websocketURL} />,
+        { context }
+      );
+    }).to.throw(/The URL '' is invalid./);
   });
 
   it('changes settings on options prop change', () => {
     const element = global.document.createElement("div");
-    const context = { plot: new Plot(element, options) };
+    let options = {framesize: 1000};
+    const context = { plot: new Plot(element, {}) };
 
-    const websocketURL = "";
+    const websocketURL = "ws://0.0.0.0";
     const component = mount(
-      <WebsocketLayer wsurl={websocketURL} />,
+      <WebsocketLayer wsurl={websocketURL} options={options}/>,
       { context }
     ); 
 
-    expect(component.props().data).to.equal(oneDimensionalData);
+    const oneDimensionalData = [];
+    expect(component.props().wsurl).to.equal(websocketURL);
+    expect(component.props().options).to.equal(options);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(component.instance().plot._Gx.all).to.equal(false);
-    expect(component.instance().plot._Gx.expand).to.equal(false);
-    expect(component.instance().plot._Gx.autol).to.equal(-1);
-    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.empty;
-    // expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(oneDimensionalData.length);
+    expect(Plot.prototype.deoverlay).to.have.property('callCount', 1);
+    expect(Plot.prototype.deoverlay.getCall(0).args).to.be.empty;
+    expect(Plot.prototype.overlay_websocket).to.have.property('callCount', 1);
+    expect(Plot.prototype.overlay_websocket.getCall(0).args).to.have.length(3);
+    expect(Plot.prototype.overlay_websocket.getCall(0).args[0]).to.equal(websocketURL);
 
-    const options = {xmin: 0, xmax: 100};
+    options = {xmin: 0, xmax: 100};
     component.setProps({options});
-    expect(component.props().data).to.equal(oneDimensionalData2);
+    expect(component.props().wsurl).to.equal(websocketURL);
+    expect(component.props().options).to.equal(options);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(component.instance().plot._Gx.all).to.equal(false);
-    expect(component.instance().plot._Gx.expand).to.equal(false);
-    expect(component.instance().plot._Gx.autol).to.equal(-1);
-    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.not.empty;
-    expect(component.instance().plot._Gx.lyr[0].options).to.equal(options);
-    // expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(oneDimensionalData2.length);
+    expect(Plot.prototype.deoverlay).to.have.property('callCount', 1);
+    expect(Plot.prototype.deoverlay.getCall(0).args).to.be.empty;
+    expect(Plot.prototype.overlay_websocket).to.have.property('callCount', 1);
+    expect(Plot.prototype.overlay_websocket.getCall(0).args).to.have.length(3);
+    expect(Plot.prototype.overlay_websocket.getCall(0).args[0]).to.equal(websocketURL);
+    expect(Plot.prototype.change_settings).to.have.property('callCount', 2);
+    expect(Plot.prototype.change_settings.getCall(1).args).to.have.length(1);
+    expect(Plot.prototype.change_settings.getCall(1).args[0]).to.equal(options);
   });
 });
