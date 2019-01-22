@@ -625,6 +625,41 @@ describe('<ArrayLayer />', () => {
   });
 });
 
+describe('<ArrayLayer />', () => {
+  it('reloads plot on options prop change', () => {
+    const options = {};
+    const element = global.document.createElement("div");
+    const context = { plot: new Plot(element, options) };
+
+    let random = [];
+    for (let i = 0; i <= 1000; i += 1) {
+        random.push(i * 10);
+    }
+    const oneDimensionalData = random;
+
+    const component = mount(
+      <ArrayLayer data={oneDimensionalData} options={options} />,
+      { context }
+    ); 
+
+    expect(component.props().data).to.equal(oneDimensionalData);
+    expect(component.instance().plot).to.not.be.undefined;
+    expect(component.instance().plot._Gx.all).to.equal(false);
+    expect(component.instance().plot._Gx.expand).to.equal(false);
+    expect(component.instance().plot._Gx.autol).to.equal(-1);
+    expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that.is.empty;
+    expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(oneDimensionalData.length);
+    expect(component.instance().plot._Gx.lyr[0].ypoint).to.eql(new Float64Array(oneDimensionalData));
+
+    const newOptions = {'subsize': 100};
+
+    component.setProps({options: newOptions});
+    expect(component.props().options).to.equal(newOptions);
+    expect(component.instance().plot._Gx.lyr[0].hcb.subsize).to.equal(100);
+  });
+});
+
 describe('<PipeLayer />', () => {
   it('pushes new data to plot on data prop change', () => {
     const element = global.document.createElement("div");

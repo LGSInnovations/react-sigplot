@@ -26,5 +26,6 @@ Layer.contextTypes = {
 
 Layer.propTypes = {
   data: PropTypes.arrayOf(PropTypes.number), // eslint-disable-line react/no-unused-prop-types
-  options: PropTypes.object // eslint-disable-line react/no-unused-prop-types
+  options: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+  layerOptions: PropTypes.object // eslint-disable-line react/no-unused-prop-types
 };
