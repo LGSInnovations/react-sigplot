@@ -45,7 +45,8 @@ export default class SigPlot extends Component {
         ref={element => this.element = element}
       >
         { children }
-      </div>);
+      </div>
+    );
   }
 }
 
