@@ -20,6 +20,8 @@ Provides a component that wraps the SigPlot library.
 |---|---|---|---|
 |`height`|`number`|300|Height of the `div` wrapping SigPlot|
 |`width`|`number`|300|Width of the `div` wrapping SigPlot|
+|`display`|`string`|inline-block|CSS display type for `div` wrapping SigPlot|
+|`styles`|`object`|`undefined`|any other CSS Styles as JS object|
 |`options`|`object`|`{all: true, expand: true, autol: 100, autohide_panbars: true}`|SigPlot `Plot` options|
 
 ### \<ArrayLayer />
@@ -27,7 +29,8 @@ Provides a component that wraps the SigPlot library.
 |Property|Type|Default|Explanation|
 |---|---|---|---|
 |`data`|`array(number)`|`undefined`|Array of values to plot|
-|`options`|`object`|`undefined`|SigPlot `Layer` options|
+|`options`|`object`|`undefined`|SigPlot data header|
+|`layerOptions`|`object`|`undefined`|SigPlot `Layer` options|
 
 ### \<PipeLayer />
 
