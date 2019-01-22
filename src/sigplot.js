@@ -24,6 +24,14 @@ export default class SigPlot extends Component {
     this.setState({ plot: this.plot });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { height, width } = this.props;
+    const { height: newHeight, width: newWidth } = nextProps;
+    if (newHeight !== height || newWidth !== width) {
+      this.plot.checkresize();
+    }
+  }
+
   render() {
     const {
       height,
