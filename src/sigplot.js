@@ -28,6 +28,8 @@ export default class SigPlot extends Component {
     const {
       height,
       width,
+      display,
+      styles,
       children: propChildren,
     } = this.props;
     const { plot } = this;
@@ -41,7 +43,12 @@ export default class SigPlot extends Component {
 
     return (
       <div
-        style={{ height, width, display: 'inline-block' }}
+        style={{
+          height,
+          width,
+          display,
+          ...styles
+        }}
         ref={element => this.element = element}
       >
         { children }
@@ -58,12 +65,15 @@ SigPlot.propTypes = {
   children: PropTypes.node,
   height: PropTypes.number,
   width: PropTypes.number,
+  display: PropTypes.string,
+  styles: PropTypes.object,
   options: PropTypes.object,
 };
 
 SigPlot.defaultProps = {
   height: 300,
   width: 300,
+  display: 'inline-block',
   options: {
     all: true,
     expand: true,
