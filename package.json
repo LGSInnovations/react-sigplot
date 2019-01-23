@@ -28,7 +28,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "sigplot": "^2.0.0-rc8"
+    "sigplot": "^2.0.0-rc9"
   },
   "jest": {
     "setupFiles": [
