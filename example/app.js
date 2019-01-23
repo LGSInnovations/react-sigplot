@@ -6,6 +6,9 @@ export default class App extends Component {
     super(props);
     this.state = {
       rasterData: [],
+      rasterData2D: [],
+      width: 300,
+      height: 300,
       href: "http://sigplot.lgsinnovations.com/dat/penny.prm"
     };
   }
@@ -13,26 +16,50 @@ export default class App extends Component {
   componentDidMount() {
     setInterval(()=> {
       let random = [];
-      for (let i = 0; i <= 1000; i += 1) {
+      let random2D = [];
+      const { width, height } = this.state;
+      for (let i = 0; i < 1000; i += 1) {
           random.push(Math.random());
+          let tmp = [];
+          for (let j = 0; j < 100; j += 1) {
+            tmp.push(Math.random());
+          }
+          random2D.push(tmp);
       }
-      this.setState({rasterData: random});
+      const newWidth = width > 350 ? width : width + 1;
+      const newHeight = height < 200 ? height : height - 1;
+      this.setState({
+        rasterData: random,
+        rasterData2D: random2D,
+        width: newWidth,
+        height: newHeight
+      });
     }, 16);
   }
 
   render() {
-    return(
+    const {
+      rasterData,
+      rasterData2D,
+      href,
+      width,
+      height
+    } = this.state;
+    return (
       <div>
-        <SigPlot options={{autol:1}}>
-          <ArrayLayer data={this.state.rasterData}/>
+        <SigPlot options={{autol:1}} height={height}>
+          <ArrayLayer data={rasterData}/>
+        </SigPlot>
+        <SigPlot>
+          <ArrayLayer options={{type: 2000, subsize: 100}} data={rasterData2D}/>
         </SigPlot>
         <SigPlot>
           <PipeLayer options={{type: 2000, subsize: 1000}} 
-            data={this.state.rasterData}/>
+            data={rasterData}/>
         </SigPlot>
-        <SigPlot>
+        <SigPlot width={width}>
           <HrefLayer
-            href={this.state.href}/>
+            href={href}/>
         </SigPlot>
       </div>
     );
