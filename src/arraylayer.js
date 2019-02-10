@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import Layer from './layer';
 
 /**
@@ -68,15 +68,14 @@ export default class ArrayLayer extends Layer {
     // and do a full `reload`;
     // otherwise, we only need to headermod
     // with the new options
-    console.log(nextOptions, currentOptions);
     if (nextData !== currentData) {
       this.plot.reload(this.layer, nextData, nextOptions);
     } else if (nextOptions !== currentOptions) {
       this.plot.headermod(this.layer, nextOptions);
     } else if (nextLayerOptions !== currentLayerOptions) {
       this.plot.get_layer(this.layer).change_settings(nextLayerOptions);
-    } else {
-      return;
     }
+
+    return false;
   }
 }

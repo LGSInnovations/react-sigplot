@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 import Layer from './layer';
 
@@ -81,8 +81,8 @@ export default class HrefLayer extends Layer {
       this.layer = this.plot.overlay_href(newHref, newOnload, newOptions);
     } else if (this.layer !== undefined && newOptions !== oldOptions) {
       this.plot.get_layer(this.layer).change_settings(newOptions);
-    } else {
-      return;
     }
+
+    return false;
   }
 }

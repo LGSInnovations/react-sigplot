@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import Layer from './layer';
 
 /**
@@ -71,8 +71,8 @@ export default class PipeLayer extends Layer {
       this.plot.headermod(this.layer, nextOptions);
     } else if (nextLayerOptions !== currentLayerOptions) {
       this.plot.get_layer(this.layer).change_settings(nextLayerOptions);
-    } else {
-      return;
     }
+
+    return false;
   }
 }
