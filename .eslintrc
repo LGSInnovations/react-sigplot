@@ -1,6 +1,5 @@
 {
-  "plugins": ["react"],
-  parser: "babel-eslint",
+  "plugins": ["react", "babel"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -16,5 +15,6 @@
     "no-unused-vars": 1,
     "react/require-default-props": 0,
     "prefer-default-export": 0
-  }
+  },
+  "parser": "babel-eslint"
 }
