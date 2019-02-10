@@ -1,6 +1,24 @@
 import React from 'react';
 import Layer from './layer';
 
+/**
+ * ArrayLayer wrapper for sigplot.layer1d and sigplot.layer2d
+ *
+ * This layer is meant for static 1D and 2D (or 1D with `framesize`)
+ * JS arrays/ArrayBuffers. A typical use case looks like
+ *
+ * For a 1-D spectral or time-series plot:
+ *
+ *   <SigPlot>
+ *     <ArrayLayer data={[1, 2, 3]}/>
+ *   </SigPlot>
+ *
+ * For a 2-D raster/heatmap:
+ *
+ *   <SigPlot>
+ *     <ArrayLayer data={[[1, 2, 3], [2, 3, 4]]}/>
+ *   </SigPlot>
+ */
 export default class ArrayLayer extends Layer {
   /**
    * Handles ArrayLayer being mounted onto the DOM
