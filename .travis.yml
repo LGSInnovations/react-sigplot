@@ -20,6 +20,10 @@ script:
   - npm run build
   - npm run test
 
+after_success:
+  - pip install --user codecov
+  - codecov --file coverage/lcov.info --disable search
+
 notifications:
   email:
     on_success: never
