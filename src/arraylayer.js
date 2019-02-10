@@ -52,10 +52,31 @@ export default class ArrayLayer extends Layer {
    * @param nextProps    the newly received properties
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data !== this.props.data) {
-      this.plot.reload(this.layer, nextProps.data, nextProps.options);
-    } else if (nextProps.options !== this.props.options) {
-      this.plot.headermod(this.layer, nextProps.options);
+    const {
+      data: currentData,
+      options: currentOptions,
+      layerOptions: currentLayerOptions
+    } = this.props;
+
+    const {
+      data: nextData,
+      options: nextOptions,
+      layerOptions: nextLayerOptions
+    } = nextProps;
+
+    // if the data changes, we'll go ahead
+    // and do a full `reload`;
+    // otherwise, we only need to headermod
+    // with the new options
+    console.log(nextOptions, currentOptions);
+    if (nextData !== currentData) {
+      this.plot.reload(this.layer, nextData, nextOptions);
+    } else if (nextOptions !== currentOptions) {
+      this.plot.headermod(this.layer, nextOptions);
+    } else if (nextLayerOptions !== currentLayerOptions) {
+      this.plot.get_layer(this.layer).change_settings(nextLayerOptions);
+    } else {
+      return;
     }
   }
 }

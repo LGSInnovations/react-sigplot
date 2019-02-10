@@ -75,23 +75,14 @@ export default class HrefLayer extends Layer {
       options: newOptions,
     } = nextProps;
 
-    // we only care if `href` or `options` changes;
+    // we only care if `href` or `options` changes
     if (newHref !== oldHref) {
-      this.plot.deoverlay();
-      this.plot.overlay_href(newHref, newOnload, newOptions);
-    } else if (newOptions !== oldOptions) {
-      this.plot.change_settings(newOptions);
+      this.plot.deoverlay(this.layer);
+      this.layer = this.plot.overlay_href(newHref, newOnload, newOptions);
+    } else if (this.layer !== undefined && newOptions !== oldOptions) {
+      this.plot.get_layer(this.layer).change_settings(newOptions);
+    } else {
+      return;
     }
   }
 }
-
-HrefLayer.propTypes = {
-  href: PropTypes.string,
-  onload: PropTypes.func,
-  options: PropTypes.object,
-};
-
-HrefLayer.defaultProps = {
-  href: '',
-  onload: null,
-};

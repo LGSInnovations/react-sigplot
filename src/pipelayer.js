@@ -23,7 +23,16 @@ export default class PipeLayer extends Layer {
    * It isn't until data begins coming that we can begin to
    */
   componentDidMount() {
-    this.layer = this.plot.overlay_pipe(this.props.options);
+    const { options, data } = this.props;
+
+    // start by setting the header of the pipe
+    this.layer = this.plot.overlay_pipe(options);
+
+    // if data is provided and non-empty, go ahead and
+    // begin plotting data
+    if (data !== undefined && data.length > 0) {
+      this.plot.push(this.layer, data);
+    }
   }
 
   /**
@@ -44,8 +53,26 @@ export default class PipeLayer extends Layer {
    * @TODO Handle headermod updates
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data && nextProps.data !== this.props.data) {
-      this.plot.push(this.layer, nextProps.data);
+    const {
+      data: currentData,
+      options: currentOptions,
+      layerOptions: currentLayerOptions
+    } = this.props;
+    const {
+      data: nextData,
+      options: nextOptions,
+      layerOptions: nextLayerOptions
+    } = nextProps;
+
+    // if new data has come in, plot that
+    if (nextData && nextData !== currentData) {
+      this.plot.push(this.layer, nextData, nextOptions);
+    } else if (nextOptions !== currentOptions) {
+      this.plot.headermod(this.layer, nextOptions);
+    } else if (nextLayerOptions !== currentLayerOptions) {
+      this.plot.get_layer(this.layer).change_settings(nextLayerOptions);
+    } else {
+      return;
     }
   }
 }

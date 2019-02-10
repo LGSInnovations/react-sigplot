@@ -75,20 +75,16 @@ export default class WebsocketLayer extends Layer {
 
     // we only care if `wsurl` or `options` changes;
     if (newWsurl !== oldWsurl) {
-      this.plot.deoverlay();
-      this.plot.overlay_websocket(newWsurl, newOverrides, newOptions);
-    } else if (newOptions !== oldOptions) {
-      this.plot.change_settings(newOptions);
+      this.plot.deoverlay(this.layer);
+      this.layer = this.plot.overlay_websocket(
+        newWsurl,
+        newOverrides,
+        newOptions
+      );
+    } else if (this.layer !== undefined && newOptions !== oldOptions) {
+      this.plot.get_layer(this.layer).change_settings(newOptions);
+    } else {
+      return;
     }
   }
 }
-
-WebsocketLayer.propTypes = {
-  wsurl: PropTypes.string,
-  overrides: PropTypes.func,
-  options: PropTypes.object,
-};
-
-WebsocketLayer.defaultProps = {
-  wsurl: '',
-};
