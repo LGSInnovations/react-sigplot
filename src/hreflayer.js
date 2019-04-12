@@ -38,12 +38,26 @@ export default class HrefLayer extends Layer {
     onload: null,
   }
 
+  constructor(props) {
+    super(props);
+
+    this.onloadWrapper.bind(this);
+  }
+
+  onloadWrapper(onload) {
+    return (hcb, i) => {
+      console.log(i);
+      this.layer = i;
+      return onload(hcb, i);
+    }
+  };
+
   /**
    * On mount, all we need to do is call overlay_href
    */
   componentDidMount() {
     const { href, onload, options } = this.props;
-    this.layer = this.plot.overlay_href(href, onload, options);
+    this.plot.overlay_href(href, this.onloadWrapper(onload), options);
   }
 
   /**
@@ -60,8 +74,6 @@ export default class HrefLayer extends Layer {
    * where we will call the plot's `reload` and `headermod` methods.
    *
    * @param nextProps    the newly received properties
-   *
-   * @TODO Investigate whether deoverlay is necessary here
    */
   componentWillReceiveProps(nextProps) {
     const {
@@ -78,7 +90,7 @@ export default class HrefLayer extends Layer {
     // we only care if `href` or `options` changes
     if (newHref !== oldHref) {
       this.plot.deoverlay(this.layer);
-      this.layer = this.plot.overlay_href(newHref, newOnload, newOptions);
+      this.plot.overlay_href(newHref, this.onloadWrapper(newOnload), newOptions);
     } else if (this.layer !== undefined && newOptions !== oldOptions) {
       this.plot.get_layer(this.layer).change_settings(newOptions);
     }

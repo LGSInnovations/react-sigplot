@@ -74,6 +74,9 @@ describe('<HrefLayer />', () => {
     const element = global.document.createElement("div");
     const context = { plot: new Plot(element, {}) };
     const hrefOne = "dat/penny.prm";
+
+    sinon.spy(Plot.prototype, 'overlay_bluefile');
+
     const component = mount(
       <HrefLayer href={hrefOne} />,
       { context }
@@ -81,6 +84,7 @@ describe('<HrefLayer />', () => {
 
     expect(component.props().href).to.equal(hrefOne);
     expect(component.instance().plot).to.not.be.undefined;
+    expect(Plot.prototype.overlay_bluefile).to.have.property('callCount', 1);
     expect(component.instance().layer).to.equal(0);
     expect(Plot.prototype.deoverlay).to.have.property('callCount', 0);
     expect(Plot.prototype.overlay_href).to.have.property('callCount', 1);
