@@ -46,11 +46,10 @@ export default class HrefLayer extends Layer {
 
   onloadWrapper(onload) {
     return (hcb, i) => {
-      console.log(i);
       this.layer = i;
       return onload(hcb, i);
-    }
-  };
+    };
+  }
 
   /**
    * On mount, all we need to do is call overlay_href
