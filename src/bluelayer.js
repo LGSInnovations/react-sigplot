@@ -33,8 +33,8 @@ export default class BlueLayer extends Layer {
    * data and options. This will return our layer object.
    */
   componentDidMount() {
-    const { data, options, layerOptions } = this.props;
-    this.layer = this.plot.overlay_bluefile(data, options, layerOptions);
+    const { data, layerOptions } = this.props;
+    this.layer = this.plot.overlay_bluefile(data, layerOptions);
   }
 
   /**
