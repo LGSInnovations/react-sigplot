@@ -16,7 +16,7 @@ import Layer from './layer';
  * For a 2-D raster/heatmap:
  *
  *   <SigPlot>
- *     <BlueLayer data={hcb} 
+ *     <BlueLayer data={hcb}
  *           layerOptions={{
  *             subsize: 8,
  *             layerType: "2D"
