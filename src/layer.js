@@ -6,10 +6,6 @@ import { Plot } from 'sigplot';
  * Abstract base class for all Layers
  */
 export default class Layer extends Component {
-  static contextTypes = {
-    plot: PropTypes.instanceOf(Plot)
-  }
-
   static propTypes = {
     /** Array of `Number` types */
     data: PropTypes.arrayOf(PropTypes.number), // eslint-disable-line react/no-unused-prop-types
@@ -24,6 +20,10 @@ export default class Layer extends Component {
      * @see See [sigplot.layer2d](https://github.com/LGSInnovations/sigplot/blob/master/js/sigplot.layer2d.js)
      */
     layerOptions: PropTypes.object // eslint-disable-line react/no-unused-prop-types
+  }
+
+  static contextTypes = {
+    plot: PropTypes.instanceOf(Plot)
   }
 
   /**

@@ -9,10 +9,6 @@ import { Plot } from 'sigplot';
  * @visibleName SigPlot.js React Wrapper
  */
 export default class SigPlot extends Component {
-  static childContextTypes = {
-    plot: PropTypes.instanceOf(Plot),
-  }
-
   static propTypes = {
     /**
      * Different Layer nodes (e.g., ArrayLayer, PipeLayer, etc.)
@@ -39,7 +35,11 @@ export default class SigPlot extends Component {
      * @see See [sigplot.Plot Docs](http://sigplot.lgsinnovations.com/html/doc/sigplot.Plot.html)
      */
     options: PropTypes.object,
-  }
+  };
+
+  static childContextTypes = {
+    plot: PropTypes.instanceOf(Plot),
+  };
 
   static defaultProps = {
     height: 300,
@@ -51,7 +51,7 @@ export default class SigPlot extends Component {
       autol: 100,
       autohide_panbars: true
     },
-  }
+  };
 
   constructor(props) {
     super(props);

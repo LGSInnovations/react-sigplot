@@ -1,7 +1,7 @@
 {
   "name": "react-sigplot",
   "description": "React wrapper for SigPlot",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "homepage": "https://github.com/lgsinnovations/react-sigplot",
   "author": {
     "name": "LGS Innovations",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "eslint-plugin-babel": "^5.3.0",
-    "sigplot": "^2.0.0-rc11"
+    "sigplot": "^2.0.0-rc15"
   },
   "jest": {
     "setupFiles": [

@@ -6,10 +6,6 @@ import { Plot } from 'sigplot';
  * Abstract base class for all Plugins
  */
 export default class Plugin extends Component {
-  static contextTypes = {
-    plot: PropTypes.instanceOf(Plot)
-  }
-
   static propTypes = {
     /**
      * Options about the plugin
@@ -17,6 +13,10 @@ export default class Plugin extends Component {
      * @see See [plugins](https://github.com/LGSInnovations/sigplot/blob/master/js/plugins.js)
      */
     pluginOptions: PropTypes.object // eslint-disable-line react/no-unused-prop-types
+  }
+
+  static contextTypes = {
+    plot: PropTypes.instanceOf(Plot)
   }
 
   /**
