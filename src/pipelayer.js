@@ -23,10 +23,10 @@ export default class PipeLayer extends Layer {
    * It isn't until data begins coming that we can begin to
    */
   componentDidMount() {
-    const { options, data } = this.props;
+    const { options, data,layerOptions } = this.props;
 
     // start by setting the header of the pipe
-    this.layer = this.plot.overlay_pipe(options);
+    this.layer = this.plot.overlay_pipe(options,layerOptions);
 
     // if data is provided and non-empty, go ahead and
     // begin plotting data
