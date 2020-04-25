@@ -1,5 +1,5 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
-import Layer from './layer';
+import React from "react"; // eslint-disable-line no-unused-vars
+import Layer from "./layer";
 
 /**
  * BlueLayer wrapper for sigplot.layer1d and sigplot.layer2d
@@ -56,13 +56,13 @@ export default class BlueLayer extends Layer {
     const {
       data: currentData,
       options: currentOptions,
-      layerOptions: currentLayerOptions
+      layerOptions: currentLayerOptions,
     } = this.props;
 
     const {
       data: nextData,
       options: nextOptions,
-      layerOptions: nextLayerOptions
+      layerOptions: nextLayerOptions,
     } = nextProps;
 
     // if the data changes, we'll go ahead

@@ -1,6 +1,6 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
-import PropTypes from 'prop-types';
-import Layer from './layer';
+import React from "react"; // eslint-disable-line no-unused-vars
+import PropTypes from "prop-types";
+import Layer from "./layer";
 
 /**
  * Wrapper around sigplot.Plot.overlay_websocket
@@ -30,11 +30,11 @@ export default class WebsocketLayer extends Layer {
 
     /** Layer options */
     options: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
-    wsurl: '',
-  }
+    wsurl: "",
+  };
 
   /**
    * On mount, all we need to do is call overlay_websocket
@@ -62,10 +62,7 @@ export default class WebsocketLayer extends Layer {
    * @TODO Investigate whether deoverlay is necessary here
    */
   componentWillReceiveProps(nextProps) {
-    const {
-      wsurl: oldWsurl,
-      options: oldOptions,
-    } = this.props;
+    const { wsurl: oldWsurl, options: oldOptions } = this.props;
 
     const {
       wsurl: newWsurl,

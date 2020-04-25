@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Plot } from 'sigplot';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Plot } from "sigplot";
 
 /**
  * SigPlot.js React wrapper class
@@ -44,12 +44,12 @@ export default class SigPlot extends Component {
   static defaultProps = {
     height: 300,
     width: 300,
-    display: 'inline-block',
+    display: "inline-block",
     options: {
       all: true,
       expand: true,
       autol: 100,
-      autohide_panbars: true
+      autohide_panbars: true,
     },
   };
 
@@ -79,7 +79,7 @@ export default class SigPlot extends Component {
     const {
       height: newHeight,
       width: newWidth,
-      options: newOptions
+      options: newOptions,
     } = nextProps;
 
     // When the outer div height/width changes,
@@ -126,11 +126,12 @@ export default class SigPlot extends Component {
      */
     const children = plot
       ? React.Children.map(propChildren, (child) => {
-        if (child) {
-          return React.cloneElement(child, { plot });
-        }
-        return null;
-      }) : null;
+          if (child) {
+            return React.cloneElement(child, { plot });
+          }
+          return null;
+        })
+      : null;
 
     return (
       <div
@@ -138,11 +139,11 @@ export default class SigPlot extends Component {
           height,
           width,
           display, // this will be deprecated
-          ...styles
+          ...styles,
         }}
-        ref={element => this.element = element}
+        ref={(element) => (this.element = element)}
       >
-        { children }
+        {children}
       </div>
     );
   }
