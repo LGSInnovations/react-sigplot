@@ -1,6 +1,6 @@
-import React, { Component } from "react"; // eslint-disable-line no-unused-vars
-import PropTypes from "prop-types";
-import { Plot } from "sigplot";
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+import { Plot } from 'sigplot';
 
 /**
  * Abstract base class for all Plugins

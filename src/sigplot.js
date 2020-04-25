@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Plot } from "sigplot";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Plot } from 'sigplot';
 
 /**
  * SigPlot.js React wrapper class
@@ -44,7 +44,7 @@ export default class SigPlot extends Component {
   static defaultProps = {
     height: 300,
     width: 300,
-    display: "inline-block",
+    display: 'inline-block',
     options: {
       all: true,
       expand: true,
@@ -126,11 +126,11 @@ export default class SigPlot extends Component {
      */
     const children = plot
       ? React.Children.map(propChildren, (child) => {
-          if (child) {
-            return React.cloneElement(child, { plot });
-          }
-          return null;
-        })
+        if (child) {
+          return React.cloneElement(child, { plot });
+        }
+        return null;
+      })
       : null;
 
     return (
@@ -141,7 +141,7 @@ export default class SigPlot extends Component {
           display, // this will be deprecated
           ...styles,
         }}
-        ref={(element) => (this.element = element)}
+        ref={element => (this.element = element)}
       >
         {children}
       </div>

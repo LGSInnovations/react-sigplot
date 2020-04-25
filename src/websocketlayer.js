@@ -1,6 +1,6 @@
-import React from "react"; // eslint-disable-line no-unused-vars
-import PropTypes from "prop-types";
-import Layer from "./layer";
+import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+import Layer from './layer';
 
 /**
  * Wrapper around sigplot.Plot.overlay_websocket
@@ -33,7 +33,7 @@ export default class WebsocketLayer extends Layer {
   };
 
   static defaultProps = {
-    wsurl: "",
+    wsurl: '',
   };
 
   /**

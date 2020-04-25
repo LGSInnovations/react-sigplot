@@ -1,11 +1,11 @@
-import React from "react";
-import { expect } from "chai";
-import sinon from "sinon";
-import { configure, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import toJson from "enzyme-to-json";
-import { Plot } from "sigplot";
-import { ArrayLayer } from "../src/index.js";
+import React from 'react';
+import { expect } from 'chai';
+import sinon from 'sinon';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import toJson from 'enzyme-to-json';
+import { Plot } from 'sigplot';
+import { ArrayLayer } from '../src/index.js';
 
 configure({ adapter: new Adapter() });
 
@@ -13,11 +13,11 @@ window.alert = (msg) => {
   console.log(msg);
 };
 
-describe("<ArrayLayer />", () => {
+describe('<ArrayLayer />', () => {
   beforeEach(() => {
-    sinon.spy(Plot.prototype, "overlay_array");
-    sinon.spy(Plot.prototype, "reload");
-    sinon.spy(Plot.prototype, "headermod");
+    sinon.spy(Plot.prototype, 'overlay_array');
+    sinon.spy(Plot.prototype, 'reload');
+    sinon.spy(Plot.prototype, 'headermod');
   });
 
   afterEach(() => {
@@ -26,9 +26,9 @@ describe("<ArrayLayer />", () => {
     Plot.prototype.headermod.restore();
   });
 
-  it("reloads plot on data prop change", () => {
+  it('reloads plot on data prop change', () => {
     const options = {};
-    const element = global.document.createElement("div");
+    const element = global.document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
     let random = [];
@@ -47,7 +47,7 @@ describe("<ArrayLayer />", () => {
     expect(component.instance().plot._Gx.expand).to.equal(false);
     expect(component.instance().plot._Gx.autol).to.equal(-1);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(
       oneDimensionalData.length
@@ -69,7 +69,7 @@ describe("<ArrayLayer />", () => {
     expect(component.instance().plot._Gx.expand).to.equal(false);
     expect(component.instance().plot._Gx.autol).to.equal(-1);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(
       oneDimensionalData2.length
@@ -81,7 +81,7 @@ describe("<ArrayLayer />", () => {
 
   it("doesn't do anything when props change but remain the same", () => {
     const options = { framesize: 1000 };
-    const element = global.document.createElement("div");
+    const element = global.document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
     let random = [];
@@ -106,9 +106,9 @@ describe("<ArrayLayer />", () => {
     expect(component.instance().plot._Gx.lyr[0].size).to.equal(1000);
   });
 
-  it("changes layer settings on layerOptions prop change", () => {
+  it('changes layer settings on layerOptions prop change', () => {
     const options = { framesize: 1000 };
-    const element = global.document.createElement("div");
+    const element = global.document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
     let random = [];
@@ -135,9 +135,9 @@ describe("<ArrayLayer />", () => {
     expect(component.instance().plot._Gx.lyr[0].size).to.equal(50);
   });
 
-  it("headermods plot on options prop change", () => {
+  it('headermods plot on options prop change', () => {
     const options = {};
-    const element = global.document.createElement("div");
+    const element = global.document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
     let random = [];
@@ -157,7 +157,7 @@ describe("<ArrayLayer />", () => {
     expect(component.instance().plot._Gx.expand).to.equal(false);
     expect(component.instance().plot._Gx.autol).to.equal(-1);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(
       oneDimensionalData.length
@@ -165,17 +165,17 @@ describe("<ArrayLayer />", () => {
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.eql(
       new Float64Array(oneDimensionalData)
     );
-    expect(Plot.prototype.overlay_array).to.have.property("callCount", 1);
-    expect(Plot.prototype.reload).to.have.property("callCount", 0);
-    expect(Plot.prototype.headermod).to.have.property("callCount", 0);
+    expect(Plot.prototype.overlay_array).to.have.property('callCount', 1);
+    expect(Plot.prototype.reload).to.have.property('callCount', 0);
+    expect(Plot.prototype.headermod).to.have.property('callCount', 0);
 
     const newOptions = { subsize: 100 };
 
     component.setProps({ options: newOptions });
     expect(component.props().options.subsize).to.equal(100);
     expect(component.instance().plot._Gx.lyr[0].hcb.subsize).to.equal(100);
-    expect(Plot.prototype.overlay_array).to.have.property("callCount", 1);
-    expect(Plot.prototype.reload).to.have.property("callCount", 0);
-    expect(Plot.prototype.headermod).to.have.property("callCount", 1);
+    expect(Plot.prototype.overlay_array).to.have.property('callCount', 1);
+    expect(Plot.prototype.reload).to.have.property('callCount', 0);
+    expect(Plot.prototype.headermod).to.have.property('callCount', 1);
   });
 });

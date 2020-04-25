@@ -1,5 +1,5 @@
-import React from "react"; // eslint-disable-line no-unused-vars
-import Layer from "./layer";
+import React from 'react'; // eslint-disable-line no-unused-vars
+import Layer from './layer';
 
 /**
  * BlueLayer wrapper for sigplot.layer1d and sigplot.layer2d
