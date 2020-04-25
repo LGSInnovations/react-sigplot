@@ -1,6 +1,6 @@
-import React from "react"; // eslint-disable-line no-unused-vars
-import PropTypes from "prop-types";
-import Layer from "./layer";
+import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
+import Layer from './layer';
 
 /**
  * Wrapper around sigplot.Plot.overlay_href
@@ -34,7 +34,7 @@ export default class HrefLayer extends Layer {
   };
 
   static defaultProps = {
-    href: "",
+    href: '',
     onload: null,
   };
 

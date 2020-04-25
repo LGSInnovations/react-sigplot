@@ -1,11 +1,11 @@
-import React from "react";
-import { expect } from "chai";
-import sinon from "sinon";
-import { configure, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import toJson from "enzyme-to-json";
-import { Plot } from "sigplot";
-import { WebsocketLayer } from "../src/index.js";
+import React from 'react';
+import { expect } from 'chai';
+import sinon from 'sinon';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import toJson from 'enzyme-to-json';
+import { Plot } from 'sigplot';
+import { WebsocketLayer } from '../src/index.js';
 
 configure({ adapter: new Adapter() });
 
@@ -13,11 +13,11 @@ window.alert = (msg) => {
   console.log(msg);
 };
 
-describe("<WebsocketLayer />", () => {
+describe('<WebsocketLayer />', () => {
   beforeEach(() => {
-    sinon.spy(Plot.prototype, "deoverlay");
-    sinon.spy(Plot.prototype, "overlay_websocket");
-    sinon.spy(Plot.prototype, "change_settings");
+    sinon.spy(Plot.prototype, 'deoverlay');
+    sinon.spy(Plot.prototype, 'overlay_websocket');
+    sinon.spy(Plot.prototype, 'change_settings');
   });
 
   afterEach(() => {
@@ -28,10 +28,10 @@ describe("<WebsocketLayer />", () => {
 
   it("doesn't reload plot on same wsurl change", () => {
     const options = { framesize: 1000 };
-    const element = global.document.createElement("div");
+    const element = global.document.createElement('div');
     const context = { plot: new Plot(element, {}) };
 
-    const websocketURL = "ws://0.0.0.0";
+    const websocketURL = 'ws://0.0.0.0';
     const component = mount(
       <WebsocketLayer wsurl={websocketURL} options={options} />,
       { context }
@@ -49,12 +49,12 @@ describe("<WebsocketLayer />", () => {
     expect(component.props().wsurl).to.equal(websocketURL);
   });
 
-  it("reloads plot on wsurl prop change", () => {
+  it('reloads plot on wsurl prop change', () => {
     const options = { framesize: 1000 };
-    const element = global.document.createElement("div");
+    const element = global.document.createElement('div');
     const context = { plot: new Plot(element, {}) };
 
-    const websocketURL = "ws://0.0.0.0";
+    const websocketURL = 'ws://0.0.0.0';
     const component = mount(
       <WebsocketLayer wsurl={websocketURL} options={options} />,
       { context }
@@ -71,7 +71,7 @@ describe("<WebsocketLayer />", () => {
     component.setProps({ wsurl: websocketURL });
     expect(component.props().wsurl).to.equal(websocketURL);
 
-    const websocketURL2 = "ws://0.0.0.0/foo";
+    const websocketURL2 = 'ws://0.0.0.0/foo';
 
     component.setProps({ wsurl: websocketURL2 });
     expect(component.props().wsurl).to.equal(websocketURL2);
@@ -83,15 +83,15 @@ describe("<WebsocketLayer />", () => {
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
   });
 
-  it("throws an error on empty URL", () => {
+  it('throws an error on empty URL', () => {
     const originalError = console.error;
     console.error = jest.fn();
     expect(() => {
-      const element = global.document.createElement("div");
+      const element = global.document.createElement('div');
       const options = {};
       const context = { plot: new Plot(element, options) };
 
-      const websocketURL = "";
+      const websocketURL = '';
       const component = mount(<WebsocketLayer wsurl={websocketURL} />, {
         context,
       });
@@ -99,12 +99,12 @@ describe("<WebsocketLayer />", () => {
     console.error = originalError;
   });
 
-  it("changes settings on options prop change", () => {
-    const element = global.document.createElement("div");
-    const options = { drawmode: "scrolling", framesize: 1000 };
+  it('changes settings on options prop change', () => {
+    const element = global.document.createElement('div');
+    const options = { drawmode: 'scrolling', framesize: 1000 };
     const context = { plot: new Plot(element, {}) };
 
-    const websocketURL = "ws://0.0.0.0";
+    const websocketURL = 'ws://0.0.0.0';
     const component = mount(
       <WebsocketLayer wsurl={websocketURL} options={options} />,
       { context }
@@ -114,8 +114,8 @@ describe("<WebsocketLayer />", () => {
     expect(component.props().wsurl).to.equal(websocketURL);
     expect(component.props().options).to.equal(options);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(Plot.prototype.deoverlay).to.have.property("callCount", 0);
-    expect(Plot.prototype.overlay_websocket).to.have.property("callCount", 1);
+    expect(Plot.prototype.deoverlay).to.have.property('callCount', 0);
+    expect(Plot.prototype.overlay_websocket).to.have.property('callCount', 1);
     expect(Plot.prototype.overlay_websocket.getCall(0).args).to.have.length(3);
     expect(Plot.prototype.overlay_websocket.getCall(0).args[0]).to.equal(
       websocketURL
@@ -125,12 +125,12 @@ describe("<WebsocketLayer />", () => {
       options.drawmode
     );
 
-    const newOptions = { drawmode: "righttoleft" };
+    const newOptions = { drawmode: 'righttoleft' };
     component.setProps({ options: newOptions });
     expect(component.props().wsurl).to.equal(websocketURL);
     expect(component.props().options).to.equal(newOptions);
     expect(component.instance().plot).to.not.be.undefined;
-    expect(Plot.prototype.overlay_websocket).to.have.property("callCount", 1);
+    expect(Plot.prototype.overlay_websocket).to.have.property('callCount', 1);
     expect(Plot.prototype.overlay_websocket.getCall(0).args).to.have.length(3);
     expect(Plot.prototype.overlay_websocket.getCall(0).args[0]).to.equal(
       websocketURL

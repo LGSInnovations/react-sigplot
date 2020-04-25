@@ -1,17 +1,17 @@
-import React from "react";
-import { expect } from "chai";
-import sinon from "sinon";
-import { configure, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import toJson from "enzyme-to-json";
-import { Plot } from "sigplot";
+import React from 'react';
+import { expect } from 'chai';
+import sinon from 'sinon';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import toJson from 'enzyme-to-json';
+import { Plot } from 'sigplot';
 import {
   SigPlot,
   ArrayLayer,
   PipeLayer,
   HrefLayer,
   WebsocketLayer,
-} from "../src/index.js";
+} from '../src/index.js';
 
 configure({ adapter: new Adapter() });
 
@@ -19,17 +19,17 @@ window.alert = (msg) => {
   console.log(msg);
 };
 
-describe("<SigPlot />", () => {
-  it("calls componentDidMount", () => {
-    sinon.spy(SigPlot.prototype, "componentDidMount");
+describe('<SigPlot />', () => {
+  it('calls componentDidMount', () => {
+    sinon.spy(SigPlot.prototype, 'componentDidMount');
     const component = mount(<SigPlot />);
     expect(SigPlot.prototype.componentDidMount).to.have.property(
-      "callCount",
+      'callCount',
       1
     );
   });
 
-  it("fails correctly if plot is undefined", () => {
+  it('fails correctly if plot is undefined', () => {
     const oldComponentDidMount = SigPlot.prototype.componentDidMount;
     SigPlot.prototype.componentDidMount = () => null;
     const component = mount(<SigPlot />);
@@ -37,13 +37,13 @@ describe("<SigPlot />", () => {
     SigPlot.prototype.componentDidMount = oldComponentDidMount;
   });
 
-  it("handles undefined children", () => {
+  it('handles undefined children', () => {
     const oldComponentDidMount = SigPlot.prototype.componentDidMount;
     const component = mount(<SigPlot children={[undefined]} />);
     expect(component.instance().children).to.be.undefined;
   });
 
-  it("renders with no child layer", () => {
+  it('renders with no child layer', () => {
     const options = {
       all: true,
       expand: true,
@@ -58,20 +58,20 @@ describe("<SigPlot />", () => {
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
     expect(component.props().children).to.be.undefined;
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
     expect(component.instance().plot._Gx.expand).to.equal(true);
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
-    expect(component.instance().plot._Gx.lyr).to.be.an("array").that.is.empty;
+    expect(component.instance().plot._Gx.lyr).to.be.an('array').that.is.empty;
   });
 
-  it("renders with no child layer with custom height and width", () => {
+  it('renders with no child layer with custom height and width', () => {
     const options = {
       all: true,
       expand: true,
@@ -86,20 +86,20 @@ describe("<SigPlot />", () => {
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
     expect(component.props().children).to.be.undefined;
-    expect(component.find("div").prop("style").width).to.equal(800);
-    expect(component.find("div").prop("style").height).to.equal(500);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(800);
+    expect(component.find('div').prop('style').height).to.equal(500);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
     expect(component.instance().plot._Gx.expand).to.equal(true);
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
-    expect(component.instance().plot._Gx.lyr).to.be.an("array").that.is.empty;
+    expect(component.instance().plot._Gx.lyr).to.be.an('array').that.is.empty;
   });
 
-  it("handles changing custom height and width", () => {
+  it('handles changing custom height and width', () => {
     const options = {
       all: true,
       expand: true,
@@ -108,7 +108,7 @@ describe("<SigPlot />", () => {
     };
     const component = mount(<SigPlot height={500} width={800} />);
 
-    sinon.spy(Plot.prototype, "checkresize");
+    sinon.spy(Plot.prototype, 'checkresize');
 
     expect(component.props().width).to.equal(800);
     expect(component.props().height).to.equal(500);
@@ -117,35 +117,35 @@ describe("<SigPlot />", () => {
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
     expect(component.props().children).to.be.undefined;
-    expect(component.find("div").prop("style").width).to.equal(800);
-    expect(component.find("div").prop("style").height).to.equal(500);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(800);
+    expect(component.find('div').prop('style').height).to.equal(500);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
     expect(component.instance().plot._Gx.expand).to.equal(true);
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
-    expect(component.instance().plot._Gx.lyr).to.be.an("array").that.is.empty;
-    expect(Plot.prototype.checkresize).to.have.property("callCount", 0);
+    expect(component.instance().plot._Gx.lyr).to.be.an('array').that.is.empty;
+    expect(Plot.prototype.checkresize).to.have.property('callCount', 0);
 
     component.setProps({ height: 200 });
     expect(component.props().width).to.equal(800);
     expect(component.props().height).to.equal(200);
-    expect(component.find("div").prop("style").width).to.equal(800);
-    expect(component.find("div").prop("style").height).to.equal(200);
-    expect(Plot.prototype.checkresize).to.have.property("callCount", 1);
+    expect(component.find('div').prop('style').width).to.equal(800);
+    expect(component.find('div').prop('style').height).to.equal(200);
+    expect(Plot.prototype.checkresize).to.have.property('callCount', 1);
 
     component.setProps({ width: 100 });
     expect(component.props().width).to.equal(100);
     expect(component.props().height).to.equal(200);
-    expect(component.find("div").prop("style").width).to.equal(100);
-    expect(component.find("div").prop("style").height).to.equal(200);
-    expect(Plot.prototype.checkresize).to.have.property("callCount", 2);
+    expect(component.find('div').prop('style').width).to.equal(100);
+    expect(component.find('div').prop('style').height).to.equal(200);
+    expect(Plot.prototype.checkresize).to.have.property('callCount', 2);
   });
 
-  it("handles changing plot options", () => {
+  it('handles changing plot options', () => {
     const options = {
       all: true,
       expand: true,
@@ -163,7 +163,7 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.expand).to.equal(true);
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
-    expect(component.instance().plot._Gx.lyr).to.be.an("array").that.is.empty;
+    expect(component.instance().plot._Gx.lyr).to.be.an('array').that.is.empty;
 
     const newOptions = {
       all: false,
@@ -177,10 +177,10 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(false);
     expect(component.instance().plot._Gx.autol).to.equal(200);
-    expect(component.instance().plot._Gx.lyr).to.be.an("array").that.is.empty;
+    expect(component.instance().plot._Gx.lyr).to.be.an('array').that.is.empty;
   });
 
-  it("renders with no child layer with custom options and custom height and width", () => {
+  it('renders with no child layer with custom options and custom height and width', () => {
     const options = {
       all: false,
       expand: false,
@@ -197,20 +197,20 @@ describe("<SigPlot />", () => {
     expect(component.props().options.autol).to.equal(1);
     expect(component.props().options.autohide_panbars).to.equal(false);
     expect(component.props().children).to.be.undefined;
-    expect(component.find("div").prop("style").width).to.equal(800);
-    expect(component.find("div").prop("style").height).to.equal(500);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(800);
+    expect(component.find('div').prop('style').height).to.equal(500);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(false);
     expect(component.instance().plot._Gx.expand).to.equal(false);
     expect(component.instance().plot._Gx.autol).to.equal(1);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(false);
-    expect(component.instance().plot._Gx.lyr).to.be.an("array").that.is.empty;
+    expect(component.instance().plot._Gx.lyr).to.be.an('array').that.is.empty;
   });
 
-  it("renders with 1D ArrayLayer with no data", () => {
+  it('renders with 1D ArrayLayer with no data', () => {
     const options = {
       all: true,
       expand: true,
@@ -230,12 +230,12 @@ describe("<SigPlot />", () => {
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
     expect(component.props().children).to.not.be.undefined;
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.data).to.equal(oneDimensionalData);
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
@@ -243,12 +243,12 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.be.null;
   });
 
-  it("renders with 2 1D ArrayLayers with no data", () => {
+  it('renders with 2 1D ArrayLayers with no data', () => {
     const options = {
       all: true,
       expand: true,
@@ -269,7 +269,7 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("array");
+    expect(component.props().children).to.be.an('array');
     expect(component.props().children).to.have.lengthOf(2);
     expect(component.props().children[0].props.data).to.equal(
       oneDimensionalData1
@@ -277,10 +277,10 @@ describe("<SigPlot />", () => {
     expect(component.props().children[1].props.data).to.equal(
       oneDimensionalData2
     );
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
@@ -288,15 +288,15 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(2);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.be.null;
-    expect(component.instance().plot._Gx.lyr[1].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[1].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[1].ypoint).to.be.null;
   });
 
-  it("renders with 1D ArrayLayer with data", () => {
+  it('renders with 1D ArrayLayer with data', () => {
     const options = {
       all: true,
       expand: true,
@@ -319,12 +319,12 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.data).to.equal(oneDimensionalData);
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
@@ -332,7 +332,7 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(
       oneDimensionalData.length
@@ -342,7 +342,7 @@ describe("<SigPlot />", () => {
     );
   });
 
-  it("renders with 1D ArrayLayer with data then re-renders", () => {
+  it('renders with 1D ArrayLayer with data then re-renders', () => {
     const options = {
       all: true,
       expand: true,
@@ -372,12 +372,12 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.data).to.equal(oneDimensionalData1);
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
@@ -385,7 +385,7 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(1);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(
       oneDimensionalData1.length
@@ -395,7 +395,7 @@ describe("<SigPlot />", () => {
     );
   });
 
-  it("renders with 2 1D ArrayLayers with data", () => {
+  it('renders with 2 1D ArrayLayers with data', () => {
     const options = {
       all: true,
       expand: true,
@@ -427,7 +427,7 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("array");
+    expect(component.props().children).to.be.an('array');
     expect(component.props().children).to.have.lengthOf(2);
     expect(component.props().children[0].props.data).to.equal(
       oneDimensionalData1
@@ -435,10 +435,10 @@ describe("<SigPlot />", () => {
     expect(component.props().children[1].props.data).to.equal(
       oneDimensionalData2
     );
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
@@ -446,7 +446,7 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.autol).to.equal(100);
     expect(component.instance().plot._Gx.autohide_panbars).to.equal(true);
     expect(component.instance().plot._Gx.lyr).to.have.lengthOf(2);
-    expect(component.instance().plot._Gx.lyr[0].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[0].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.have.lengthOf(
       oneDimensionalData1.length
@@ -454,7 +454,7 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.lyr[0].ypoint).to.eql(
       new Float64Array(oneDimensionalData1)
     );
-    expect(component.instance().plot._Gx.lyr[1].options).to.be.an("object").that
+    expect(component.instance().plot._Gx.lyr[1].options).to.be.an('object').that
       .is.empty;
     expect(component.instance().plot._Gx.lyr[1].ypoint).to.have.lengthOf(
       oneDimensionalData2.length
@@ -464,7 +464,7 @@ describe("<SigPlot />", () => {
     );
   });
 
-  it("renders with 2D ArrayLayer with no data", () => {
+  it('renders with 2D ArrayLayer with no data', () => {
     const options = {
       all: true,
       expand: true,
@@ -485,12 +485,12 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.data).to.equal(twoDimensionalData);
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
@@ -503,7 +503,7 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.lyr[0].buf).to.be.empty;
   });
 
-  it("renders with 2D ArrayLayer with data", () => {
+  it('renders with 2D ArrayLayer with data', () => {
     const options = {
       all: true,
       expand: true,
@@ -527,12 +527,12 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.data).to.equal(twoDimensionalData);
-    expect(component.find("div").prop("style").width).to.equal(300);
-    expect(component.find("div").prop("style").height).to.equal(300);
-    expect(component.find("div").prop("style").display).to.equal(
-      "inline-block"
+    expect(component.find('div').prop('style').width).to.equal(300);
+    expect(component.find('div').prop('style').height).to.equal(300);
+    expect(component.find('div').prop('style').display).to.equal(
+      'inline-block'
     );
     expect(component.instance().plot).to.not.be.undefined;
     expect(component.instance().plot._Gx.all).to.equal(true);
@@ -544,7 +544,7 @@ describe("<SigPlot />", () => {
     expect(component.instance().plot._Gx.lyr[0].hcb.type).to.equal(2000);
   });
 
-  it("throws with 1D PipeLayer with no data and no size defined", () => {
+  it('throws with 1D PipeLayer with no data and no size defined', () => {
     const originalError = console.error;
     console.error = jest.fn();
     expect(() => {
@@ -567,7 +567,7 @@ describe("<SigPlot />", () => {
     console.error = originalError;
   });
 
-  it("renders with 2D PipeLayer with no data", () => {
+  it('renders with 2D PipeLayer with no data', () => {
     const options = {
       all: true,
       expand: true,
@@ -590,7 +590,7 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.data).to.equal(twoDimensionalData);
     expect(component.instance().plot._Gx.all).to.equal(true);
     expect(component.instance().plot._Gx.expand).to.equal(true);
@@ -604,7 +604,7 @@ describe("<SigPlot />", () => {
     );
   });
 
-  it("renders with 2D PipeLayer with data passed in but not displayed", () => {
+  it('renders with 2D PipeLayer with data passed in but not displayed', () => {
     const options = {
       all: true,
       expand: true,
@@ -630,7 +630,7 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.data).to.equal(twoDimensionalData);
     expect(component.instance().plot._Gx.all).to.equal(true);
     expect(component.instance().plot._Gx.expand).to.equal(true);
@@ -644,14 +644,14 @@ describe("<SigPlot />", () => {
     );
   });
 
-  it("renders with HrefLayer with no file", () => {
+  it('renders with HrefLayer with no file', () => {
     const options = {
       all: true,
       expand: true,
       autol: 100,
       autohide_panbars: true,
     };
-    const file = "";
+    const file = '';
     const component = mount(
       <SigPlot options={options}>
         <HrefLayer />
@@ -663,18 +663,18 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.href).to.equal(file);
   });
 
-  it("renders with HrefLayer with valid href", () => {
+  it('renders with HrefLayer with valid href', () => {
     const options = {
       all: true,
       expand: true,
       autol: 100,
       autohide_panbars: true,
     };
-    const file = "dat/penny.prm";
+    const file = 'dat/penny.prm';
     const component = mount(
       <SigPlot options={options}>
         <HrefLayer href={file} />
@@ -686,18 +686,18 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.href).to.equal(file);
   });
 
-  it("renders with HrefLayer with invalid href", () => {
+  it('renders with HrefLayer with invalid href', () => {
     const options = {
       all: true,
       expand: true,
       autol: 100,
       autohide_panbars: true,
     };
-    const file = "dat/invalid.prm";
+    const file = 'dat/invalid.prm';
     const component = mount(
       <SigPlot options={options}>
         <HrefLayer href={file} />
@@ -709,19 +709,19 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("object");
+    expect(component.props().children).to.be.an('object');
     expect(component.props().children.props.href).to.equal(file);
   });
 
-  it("renders with HrefLayer with 2 valid hrefs", () => {
+  it('renders with HrefLayer with 2 valid hrefs', () => {
     const options = {
       all: true,
       expand: true,
       autol: 100,
       autohide_panbars: true,
     };
-    const file1 = "dat/penny.prm";
-    const file2 = "dat/sin.tmp";
+    const file1 = 'dat/penny.prm';
+    const file2 = 'dat/sin.tmp';
     const component = mount(
       <SigPlot options={options}>
         <HrefLayer href={file1} />
@@ -734,7 +734,7 @@ describe("<SigPlot />", () => {
     expect(component.props().options.expand).to.equal(true);
     expect(component.props().options.autol).to.equal(100);
     expect(component.props().options.autohide_panbars).to.equal(true);
-    expect(component.props().children).to.be.an("array");
+    expect(component.props().children).to.be.an('array');
     expect(component.props().children).to.have.lengthOf(2);
     expect(component.props().children[0].props.href).to.equal(file1);
     expect(component.props().children[1].props.href).to.equal(file2);
