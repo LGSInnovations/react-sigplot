@@ -38,25 +38,12 @@ export default class HrefLayer extends Layer {
     onload: null,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.onloadWrapper.bind(this);
-  }
-
-  onloadWrapper(onload) {
-    return (hcb, i) => {
-      this.layer = i;
-      return onload(hcb, i);
-    };
-  }
-
   /**
    * On mount, all we need to do is call overlay_href
    */
   componentDidMount() {
     const { href, onload, options } = this.props;
-    this.plot.overlay_href(href, this.onloadWrapper(onload), options);
+    this.layer = this.plot.overlay_href(href, onload, options);
   }
 
   /**
@@ -84,7 +71,7 @@ export default class HrefLayer extends Layer {
       this.plot.deoverlay(this.layer);
       this.plot.overlay_href(
         newHref,
-        this.onloadWrapper(newOnload),
+        newOnload,
         newOptions
       );
     } else if (this.layer !== undefined && newOptions !== oldOptions) {
