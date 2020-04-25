@@ -1,6 +1,6 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
-import PropTypes from 'prop-types';
-import Layer from './layer';
+import React from "react"; // eslint-disable-line no-unused-vars
+import PropTypes from "prop-types";
+import Layer from "./layer";
 
 /**
  * Wrapper around sigplot.Plot.overlay_href
@@ -31,12 +31,12 @@ export default class HrefLayer extends Layer {
 
     /** Layer options */
     options: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
-    href: '',
+    href: "",
     onload: null,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -75,21 +75,18 @@ export default class HrefLayer extends Layer {
    * @param nextProps    the newly received properties
    */
   componentWillReceiveProps(nextProps) {
-    const {
-      href: oldHref,
-      options: oldOptions,
-    } = this.props;
+    const { href: oldHref, options: oldOptions } = this.props;
 
-    const {
-      href: newHref,
-      onload: newOnload,
-      options: newOptions,
-    } = nextProps;
+    const { href: newHref, onload: newOnload, options: newOptions } = nextProps;
 
     // we only care if `href` or `options` changes
     if (newHref !== oldHref) {
       this.plot.deoverlay(this.layer);
-      this.plot.overlay_href(newHref, this.onloadWrapper(newOnload), newOptions);
+      this.plot.overlay_href(
+        newHref,
+        this.onloadWrapper(newOnload),
+        newOptions
+      );
     } else if (this.layer !== undefined && newOptions !== oldOptions) {
       this.plot.get_layer(this.layer).change_settings(newOptions);
     }

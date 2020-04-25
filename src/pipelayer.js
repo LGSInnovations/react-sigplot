@@ -1,5 +1,5 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
-import Layer from './layer';
+import React from "react"; // eslint-disable-line no-unused-vars
+import Layer from "./layer";
 
 /**
  * Wrapper around sigplot.Plot.overlay_pipe
@@ -56,12 +56,12 @@ export default class PipeLayer extends Layer {
     const {
       data: currentData,
       options: currentOptions,
-      layerOptions: currentLayerOptions
+      layerOptions: currentLayerOptions,
     } = this.props;
     const {
       data: nextData,
       options: nextOptions,
-      layerOptions: nextLayerOptions
+      layerOptions: nextLayerOptions,
     } = nextProps;
 
     // if new data has come in, plot that

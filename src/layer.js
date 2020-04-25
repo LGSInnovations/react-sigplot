@@ -1,6 +1,6 @@
-import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
-import PropTypes from 'prop-types';
-import { Plot } from 'sigplot';
+import React, { Component } from "react"; // eslint-disable-line no-unused-vars
+import PropTypes from "prop-types";
+import { Plot } from "sigplot";
 
 /**
  * Abstract base class for all Layers
@@ -19,12 +19,12 @@ export default class Layer extends Component {
      * @see See [sigplot.layer1d](https://github.com/LGSInnovations/sigplot/blob/master/js/sigplot.layer1d.js)
      * @see See [sigplot.layer2d](https://github.com/LGSInnovations/sigplot/blob/master/js/sigplot.layer2d.js)
      */
-    layerOptions: PropTypes.object // eslint-disable-line react/no-unused-prop-types
-  }
+    layerOptions: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+  };
 
   static contextTypes = {
-    plot: PropTypes.instanceOf(Plot)
-  }
+    plot: PropTypes.instanceOf(Plot),
+  };
 
   /**
    * On unmount, all we need to do is remove the layer
