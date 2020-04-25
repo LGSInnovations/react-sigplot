@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "eslint-plugin-babel": "^5.3.0",
-    "sigplot": "^2.0.0-rc15"
+    "sigplot": "^2.0.0-rc17"
   },
   "jest": {
     "setupFiles": [
@@ -37,36 +37,36 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.0",
     "babel-core": "^7.0.0-bridge",
-    "babel-eslint": "^10.0.1",
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.1.0",
     "canvas": "^1.6.13",
     "chai": "^4.2.0",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.7.0",
-    "enzyme-to-json": "^3.3.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-loader": "^2.1.1",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-react": "^7.19.0",
     "file-loader": "^2.0.0",
     "jest": "^23.6.0",
     "jest-canvas-mock": "^1.1.0",
     "merge": ">=1.2.1",
     "prop-types": "^15.6.2",
-    "react": "^16.6.3",
+    "react": "^16.13.1",
     "react-doc-generator": "^1.2.5",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.13.1",
     "sinon": "^7.1.1",
-    "webpack": "^4.26.0",
-    "webpack-cli": "^3.1.2"
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {
     "prop-types": "^15.6.2",
