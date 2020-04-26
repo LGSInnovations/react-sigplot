@@ -3,14 +3,12 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import toJson from 'enzyme-to-json';
 import { Plot } from 'sigplot';
 import {
   SigPlot,
   ArrayLayer,
   PipeLayer,
   HrefLayer,
-  WebsocketLayer,
 } from '../src/index.js';
 
 configure({ adapter: new Adapter() });
@@ -22,7 +20,7 @@ window.alert = (msg) => {
 describe('<SigPlot />', () => {
   it('calls componentDidMount', () => {
     sinon.spy(SigPlot.prototype, 'componentDidMount');
-    const component = mount(<SigPlot />);
+    mount(<SigPlot />);
     expect(SigPlot.prototype.componentDidMount).to.have.property(
       'callCount',
       1
@@ -38,18 +36,12 @@ describe('<SigPlot />', () => {
   });
 
   it('handles undefined children', () => {
-    const oldComponentDidMount = SigPlot.prototype.componentDidMount;
+    // eslint-disable-next-line react/no-children-prop
     const component = mount(<SigPlot children={[undefined]} />);
     expect(component.instance().children).to.be.undefined;
   });
 
   it('renders with no child layer', () => {
-    const options = {
-      all: true,
-      expand: true,
-      autol: 100,
-      autohide_panbars: true,
-    };
     const component = mount(<SigPlot />);
     expect(component.props().width).to.equal(300);
     expect(component.props().height).to.equal(300);
@@ -72,12 +64,6 @@ describe('<SigPlot />', () => {
   });
 
   it('renders with no child layer with custom height and width', () => {
-    const options = {
-      all: true,
-      expand: true,
-      autol: 100,
-      autohide_panbars: true,
-    };
     const component = mount(<SigPlot height={500} width={800} />);
     expect(component.props().width).to.equal(800);
     expect(component.props().height).to.equal(500);
@@ -100,12 +86,6 @@ describe('<SigPlot />', () => {
   });
 
   it('handles changing custom height and width', () => {
-    const options = {
-      all: true,
-      expand: true,
-      autol: 100,
-      autohide_panbars: true,
-    };
     const component = mount(<SigPlot height={500} width={800} />);
 
     sinon.spy(Plot.prototype, 'checkresize');
@@ -349,18 +329,12 @@ describe('<SigPlot />', () => {
       autol: 100,
       autohide_panbars: true,
     };
-    let random1 = [];
+    const random1 = [];
     for (let i = 0; i <= 1000; i += 1) {
       random1.push(i * 10);
     }
-    let random2 = [];
-    for (let i = 0; i <= 1000; i += 1) {
-      random2.push(i * 10);
-    }
     const oneDimensionalData1 = random1;
-    const oneDimensionalData2 = random2;
 
-    let childInstance = {};
     const component = mount(
       <SigPlot options={options}>
         <ArrayLayer data={oneDimensionalData1} />
@@ -403,12 +377,12 @@ describe('<SigPlot />', () => {
       autohide_panbars: true,
     };
 
-    let random1 = [];
+    const random1 = [];
     for (let i = 0; i <= 1000; i += 1) {
       random1.push(10 * i);
     }
 
-    let random2 = [];
+    const random2 = [];
     for (let i = 0; i <= 1000; i += 1) {
       random2.push(10 * i);
     }
@@ -472,8 +446,7 @@ describe('<SigPlot />', () => {
       autohide_panbars: true,
     };
     const layerOptions = { type: 2000, subsize: 1000 };
-    let random = [];
-    const twoDimensionalData = random;
+    const twoDimensionalData = [];
     const component = mount(
       <SigPlot options={options}>
         <ArrayLayer data={twoDimensionalData} options={layerOptions} />
@@ -554,11 +527,9 @@ describe('<SigPlot />', () => {
         autol: 100,
         autohide_panbars: true,
       };
-      let random = [];
-      const oneDimensionalData = random;
-      const component = mount(
+      mount(
         <SigPlot options={options}>
-          <PipeLayer data={oneDimensionalData} />
+          <PipeLayer data={[]} />
         </SigPlot>
       );
     }).to.throw(
@@ -574,8 +545,7 @@ describe('<SigPlot />', () => {
       autol: 100,
       autohide_panbars: true,
     };
-    let random = [];
-    const twoDimensionalData = random;
+    const twoDimensionalData = [];
     const component = mount(
       <SigPlot options={options}>
         <PipeLayer

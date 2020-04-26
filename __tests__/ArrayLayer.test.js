@@ -3,9 +3,8 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import toJson from 'enzyme-to-json';
 import { Plot } from 'sigplot';
-import { ArrayLayer } from '../src/index.js';
+import { ArrayLayer } from '../src/index';
 
 configure({ adapter: new Adapter() });
 
@@ -28,10 +27,10 @@ describe('<ArrayLayer />', () => {
 
   it('reloads plot on data prop change', () => {
     const options = {};
-    const element = global.document.createElement('div');
+    const element = document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
-    let random = [];
+    const random = [];
     for (let i = 0; i <= 1000; i += 1) {
       random.push(i * 10);
     }
@@ -56,7 +55,7 @@ describe('<ArrayLayer />', () => {
       new Float64Array(oneDimensionalData)
     );
 
-    let random2 = [];
+    const random2 = [];
     for (let i = 0; i <= 1000; i += 1) {
       random2.push(i * 10);
     }
@@ -81,10 +80,10 @@ describe('<ArrayLayer />', () => {
 
   it("doesn't do anything when props change but remain the same", () => {
     const options = { framesize: 1000 };
-    const element = global.document.createElement('div');
+    const element = document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
-    let random = [];
+    const random = [];
     for (let i = 0; i <= 1000; i += 1) {
       random.push(i * 10);
     }
@@ -108,10 +107,10 @@ describe('<ArrayLayer />', () => {
 
   it('changes layer settings on layerOptions prop change', () => {
     const options = { framesize: 1000 };
-    const element = global.document.createElement('div');
+    const element = document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
-    let random = [];
+    const random = [];
     for (let i = 0; i <= 1000; i += 1) {
       random.push(i * 10);
     }
@@ -137,10 +136,10 @@ describe('<ArrayLayer />', () => {
 
   it('headermods plot on options prop change', () => {
     const options = {};
-    const element = global.document.createElement('div');
+    const element = document.createElement('div');
     const context = { plot: new Plot(element, options) };
 
-    let random = [];
+    const random = [];
     for (let i = 0; i <= 1000; i += 1) {
       random.push(i * 10);
     }

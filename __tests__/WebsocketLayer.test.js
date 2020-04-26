@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import toJson from 'enzyme-to-json';
 import { Plot } from 'sigplot';
 import { WebsocketLayer } from '../src/index.js';
 
@@ -92,7 +91,7 @@ describe('<WebsocketLayer />', () => {
       const context = { plot: new Plot(element, options) };
 
       const websocketURL = '';
-      const component = mount(<WebsocketLayer wsurl={websocketURL} />, {
+      mount(<WebsocketLayer wsurl={websocketURL} />, {
         context,
       });
     }).to.throw(/The URL '' is invalid./);
@@ -110,7 +109,6 @@ describe('<WebsocketLayer />', () => {
       { context }
     );
 
-    const oneDimensionalData = [];
     expect(component.props().wsurl).to.equal(websocketURL);
     expect(component.props().options).to.equal(options);
     expect(component.instance().plot).to.not.be.undefined;

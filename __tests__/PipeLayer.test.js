@@ -3,7 +3,6 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import toJson from 'enzyme-to-json';
 import { Plot } from 'sigplot';
 import { PipeLayer } from '../src/index.js';
 
@@ -30,11 +29,9 @@ describe('<PipeLayer />', () => {
     const element = global.document.createElement('div');
     const context = { plot: new Plot(element, {}) };
 
-    const twoDimensionalData = [];
-
     const options = { framesize: 1000, type: 2000, subsize: 1000 };
     const component = mount(
-      <PipeLayer data={twoDimensionalData} options={options} />,
+      <PipeLayer data={[]} options={options} />,
       { context }
     );
     expect(component.props().options).to.equal(options);
@@ -56,13 +53,11 @@ describe('<PipeLayer />', () => {
     const element = global.document.createElement('div');
     const context = { plot: new Plot(element, {}) };
 
-    const twoDimensionalData = [];
-
     const layerOptions = { drawmode: 'scrolling' };
     const options = { framesize: 1000, type: 2000, subsize: 1000 };
     const component = mount(
       <PipeLayer
-        data={twoDimensionalData}
+        data={[]}
         options={options}
         layerOptions={layerOptions}
       />,
