@@ -74,7 +74,7 @@ export default class SigPlot extends Component {
     this.setState({ plot: this.plot });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { height, width, options } = this.props;
     const {
       height: newHeight,

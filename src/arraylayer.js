@@ -51,7 +51,7 @@ export default class ArrayLayer extends Layer {
    *
    * @param nextProps    the newly received properties
    */
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       data: currentData,
       options: currentOptions,

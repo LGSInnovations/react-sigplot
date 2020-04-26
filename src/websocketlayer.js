@@ -61,7 +61,7 @@ export default class WebsocketLayer extends Layer {
    *
    * @TODO Investigate whether deoverlay is necessary here
    */
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { wsurl: oldWsurl, options: oldOptions } = this.props;
 
     const {

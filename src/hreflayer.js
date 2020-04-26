@@ -61,7 +61,7 @@ export default class HrefLayer extends Layer {
    *
    * @param nextProps    the newly received properties
    */
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { href: oldHref, options: oldOptions } = this.props;
 
     const { href: newHref, onload: newOnload, options: newOptions } = nextProps;
