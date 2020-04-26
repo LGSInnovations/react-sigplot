@@ -9,7 +9,7 @@ import {
   ArrayLayer,
   PipeLayer,
   HrefLayer,
-} from '../src/index.js';
+} from '../src/index';
 
 configure({ adapter: new Adapter() });
 

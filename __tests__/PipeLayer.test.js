@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Plot } from 'sigplot';
-import { PipeLayer } from '../src/index.js';
+import { PipeLayer } from '../src/index';
 
 configure({ adapter: new Adapter() });
 
