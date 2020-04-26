@@ -1,7 +1,7 @@
 {
   "name": "react-sigplot",
   "description": "React wrapper for SigPlot",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "homepage": "https://github.com/lgsinnovations/react-sigplot",
   "author": {
     "name": "LGS Innovations",
