@@ -69,7 +69,7 @@ export default class HrefLayer extends Layer {
     // we only care if `href` or `options` changes
     if (newHref !== oldHref) {
       this.plot.deoverlay(this.layer);
-      this.plot.overlay_href(
+      this.layer = this.plot.overlay_href(
         newHref,
         newOnload,
         newOptions
