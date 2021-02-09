@@ -54,6 +54,14 @@ Provides a component that wraps the SigPlot library.
 |`overrides`|`object`|`undefined`|SigPlot `Layer` overrides|
 |`options`|`object`|`undefined`|SigPlot `Layer` options|
 
+### \<WPipeLayer />
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`wsurl`|`string`|`''`|URL to the websocket server|
+|`overrides`|`object`|`undefined`|SigPlot `Layer` overrides|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+|`fps`|`number`|`undefined`|Frames per second for WPIPE|
+
 ## Usage
 
 ### Basic
