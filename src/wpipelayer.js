@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import PropTypes from 'prop-types';
 import Layer from './layer';
 
 export default class WPipeLayer extends Layer {
@@ -78,7 +79,12 @@ export default class WPipeLayer extends Layer {
     // with the new options
     if (nextWsurl !== currentWsurl || currentFps !== nextFps) {
       this.plot.delete_layer(this.layer);
-      this.layer = this.plot.overlay_wpipe(nextWsurl, options, layerOptions, nextFps);
+      this.layer = this.plot.overlay_wpipe(
+        nextWsurl,
+        nextOptions,
+        nextLayerOptions,
+        nextFps
+      );
     } else if (nextOptions !== currentOptions) {
       this.plot.headermod(this.layer, nextOptions);
     } else if (nextLayerOptions !== currentLayerOptions) {

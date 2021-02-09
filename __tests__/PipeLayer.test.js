@@ -30,10 +30,9 @@ describe('<PipeLayer />', () => {
     const context = { plot: new Plot(element, {}) };
 
     const options = { framesize: 1000, type: 2000, subsize: 1000 };
-    const component = mount(
-      <PipeLayer data={[]} options={options} />,
-      { context }
-    );
+    const component = mount(<PipeLayer data={[]} options={options} />, {
+      context,
+    });
     expect(component.props().options).to.equal(options);
     expect(Plot.prototype.push).to.have.property('callCount', 0);
     expect(Plot.prototype.headermod).to.have.property('callCount', 0);
@@ -56,11 +55,7 @@ describe('<PipeLayer />', () => {
     const layerOptions = { drawmode: 'scrolling' };
     const options = { framesize: 1000, type: 2000, subsize: 1000 };
     const component = mount(
-      <PipeLayer
-        data={[]}
-        options={options}
-        layerOptions={layerOptions}
-      />,
+      <PipeLayer data={[]} options={options} layerOptions={layerOptions} />,
       { context }
     );
     expect(component.props().layerOptions).to.equal(layerOptions);

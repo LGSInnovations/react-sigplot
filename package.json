@@ -22,9 +22,14 @@
     "src"
   ],
   "scripts": {
-    "clean": "rm -rf ./dist && mkdir ./dist",
-    "lint": "./node_modules/eslint/bin/eslint.js src/*.js __tests__/*.js *.js",
-    "build": "npm run clean && npm run lint && ./node_modules/webpack/bin/webpack.js --progress",
+    "build": "npm run clean && npm run lint && npx webpack --progress",
+    "clean": "rm -rf ./dist",
+    "eslint": "npx eslint . --fix --ignore-path .gitignore",
+    "eslint:check": "npx eslint . --ignore-path .gitignore",
+    "generate-docs": "rm -rf ./doc/; npx jsdoc --configure .jsdoc.json --verbose",
+    "lint": "npm run prettier && npm run eslint",
+    "prettier": "npx prettier --ignore-path .gitignore --write \"**/*{.js,.css,.json}\"",
+    "prettier:check": "npx prettier --check --ignore-path .gitignore --write \"**/*{.js,.css,.json}\"",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -33,6 +38,71 @@
   "jest": {
     "setupFiles": [
       "jest-canvas-mock"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es2017": true,
+      "jest": true
+    },
+    "globals": {
+      "browser": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "prettier"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 9,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "jest",
+      "react"
+    ],
+    "rules": {
+      "no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_"
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": [
+          "*.js",
+          "src/**/*.js",
+          "__tests__/**/*.js",
+          "package.json"
+        ],
+        "options": {
+          "singleQuote": true,
+          "tabWidth": 2
+        }
+      }
     ]
   },
   "devDependencies": {
@@ -49,6 +119,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
     "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.20.2",
@@ -58,7 +129,9 @@
     "file-loader": "^6.0.0",
     "jest": "^25.4.0",
     "jest-canvas-mock": "^2.2.0",
+    "minami": "^1.2.3",
     "merge": ">=1.2.1",
+    "prettier": "^2.0.4",
     "react-doc-generator": "^1.2.5",
     "sinon": "^9.0.2",
     "webpack": "^4.43.0",

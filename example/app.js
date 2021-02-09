@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { SigPlot, ArrayLayer, PipeLayer, HrefLayer } from '../src';
 
 export default class App extends Component {
@@ -9,22 +9,22 @@ export default class App extends Component {
       rasterData2D: [],
       width: 300,
       height: 300,
-      href: "http://sigplot.lgsinnovations.com/dat/penny.prm"
+      href: 'http://sigplot.lgsinnovations.com/dat/penny.prm',
     };
   }
 
   componentDidMount() {
-    setInterval(()=> {
+    setInterval(() => {
       let random = [];
       let random2D = [];
       const { width, height } = this.state;
       for (let i = 0; i < 1000; i += 1) {
-          random.push(Math.random());
-          let tmp = [];
-          for (let j = 0; j < 100; j += 1) {
-            tmp.push(Math.random());
-          }
-          random2D.push(tmp);
+        random.push(Math.random());
+        let tmp = [];
+        for (let j = 0; j < 100; j += 1) {
+          tmp.push(Math.random());
+        }
+        random2D.push(tmp);
       }
       const newWidth = width > 350 ? width : width + 1;
       const newHeight = height < 200 ? height : height - 1;
@@ -32,34 +32,32 @@ export default class App extends Component {
         rasterData: random,
         rasterData2D: random2D,
         width: newWidth,
-        height: newHeight
+        height: newHeight,
       });
     }, 16);
   }
 
   render() {
-    const {
-      rasterData,
-      rasterData2D,
-      href,
-      width,
-      height
-    } = this.state;
+    const { rasterData, rasterData2D, href, width, height } = this.state;
     return (
       <div>
-        <SigPlot options={{autol:1}} height={height}>
-          <ArrayLayer data={rasterData}/>
+        <SigPlot options={{ autol: 1 }} height={height}>
+          <ArrayLayer data={rasterData} />
         </SigPlot>
         <SigPlot>
-          <ArrayLayer options={{type: 2000, subsize: 100}} data={rasterData2D}/>
+          <ArrayLayer
+            options={{ type: 2000, subsize: 100 }}
+            data={rasterData2D}
+          />
         </SigPlot>
         <SigPlot>
-          <PipeLayer options={{type: 2000, subsize: 1000}} 
-            data={rasterData}/>
+          <PipeLayer
+            options={{ type: 2000, subsize: 1000 }}
+            data={rasterData}
+          />
         </SigPlot>
         <SigPlot width={width}>
-          <HrefLayer
-            href={href}/>
+          <HrefLayer href={href} />
         </SigPlot>
       </div>
     );
