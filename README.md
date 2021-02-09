@@ -91,4 +91,4 @@ $ python -m SimpleHTTPServer 8888
 and in a browser, navigate to http://0.0.0.0:8888, you
 should see the following
 
-![React Sigplot](docs/example.gif)
+![React Sigplot](https://github.com/spectriclabs/react-sigplot/blob/master/docs/example.gif)
