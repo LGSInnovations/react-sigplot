@@ -21,4 +21,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./doc/sigfile/${{ steps.vars.outputs.doc_version }}
+          publish_dir: ./doc/react-sigplot/${{ steps.vars.outputs.doc_version }}
