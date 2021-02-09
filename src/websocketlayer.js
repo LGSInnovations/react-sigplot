@@ -10,7 +10,7 @@ import Layer from './layer';
  *     <WebsocketLayer wsurl={'ws://localhost:8080'}/>
  *   </SigPlot>
  */
-export default class WebsocketLayer extends Layer {
+class WebsocketLayer extends Layer {
   static propTypes = {
     /**
      * URI to websocket server
@@ -85,3 +85,5 @@ export default class WebsocketLayer extends Layer {
     return false;
   }
 }
+
+export default WebsocketLayer;

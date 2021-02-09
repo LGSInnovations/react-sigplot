@@ -5,7 +5,7 @@ import { Plot } from 'sigplot';
 /**
  * Abstract base class for all Plugins
  */
-export default class Plugin extends Component {
+class Plugin extends Component {
   static propTypes = {
     /**
      * Options about the plugin
@@ -48,3 +48,5 @@ export default class Plugin extends Component {
     return false;
   }
 }
+
+export default Plugin;

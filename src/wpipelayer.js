@@ -2,7 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import PropTypes from 'prop-types';
 import Layer from './layer';
 
-export default class WPipeLayer extends Layer {
+class WPipeLayer extends Layer {
   static propTypes = {
     /**
      * URI to WPIPE websocket server
@@ -93,3 +93,5 @@ export default class WPipeLayer extends Layer {
     return false;
   }
 }
+
+export default WPipeLayer;
