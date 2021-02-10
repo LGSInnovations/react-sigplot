@@ -24,7 +24,7 @@ import Layer from './layer';
  *       />
  *   </SigPlot>
  */
-export default class BlueLayer extends Layer {
+class BlueLayer extends Layer {
   /**
    * Handles BlueLayer being mounted onto the DOM
    *
@@ -80,3 +80,5 @@ export default class BlueLayer extends Layer {
     return false;
   }
 }
+
+export default BlueLayer;

@@ -5,10 +5,10 @@ import { Plot } from 'sigplot';
 /**
  * SigPlot.js React wrapper class
  *
- * @version 0.1.2
+ * @version 0.1.15
  * @visibleName SigPlot.js React Wrapper
  */
-export default class SigPlot extends Component {
+class SigPlot extends Component {
   static propTypes = {
     /**
      * Different Layer nodes (e.g., ArrayLayer, PipeLayer, etc.)
@@ -148,3 +148,5 @@ export default class SigPlot extends Component {
     );
   }
 }
+
+export default SigPlot;

@@ -54,6 +54,14 @@ Provides a component that wraps the SigPlot library.
 |`overrides`|`object`|`undefined`|SigPlot `Layer` overrides|
 |`options`|`object`|`undefined`|SigPlot `Layer` options|
 
+### \<WPipeLayer />
+|Property|Type|Default|Explanation|
+|---|---|---|---|
+|`wsurl`|`string`|`''`|URL to the websocket server|
+|`overrides`|`object`|`undefined`|SigPlot `Layer` overrides|
+|`options`|`object`|`undefined`|SigPlot `Layer` options|
+|`fps`|`number`|`undefined`|Frames per second for WPIPE|
+
 ## Usage
 
 ### Basic
@@ -91,4 +99,4 @@ $ python -m SimpleHTTPServer 8888
 and in a browser, navigate to http://0.0.0.0:8888, you
 should see the following
 
-![React Sigplot](docs/example.gif)
+![React Sigplot](https://raw.githubusercontent.com/spectriclabs/react-sigplot/master/docs/example.gif)

@@ -5,7 +5,7 @@ import { Plot } from 'sigplot';
 /**
  * Abstract base class for all Layers
  */
-export default class Layer extends Component {
+class Layer extends Component {
   static propTypes = {
     /** Array of `Number` types */
     data: PropTypes.arrayOf(PropTypes.number), // eslint-disable-line react/no-unused-prop-types
@@ -55,3 +55,5 @@ export default class Layer extends Component {
     return false;
   }
 }
+
+export default Layer;

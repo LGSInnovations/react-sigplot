@@ -10,7 +10,7 @@ import Layer from './layer';
  *     <HrefLayer href={'/path/to/file.tmp'}/>
  *   </SigPlot>
  */
-export default class HrefLayer extends Layer {
+class HrefLayer extends Layer {
   static propTypes = {
     /**
      * URI to BLUEFILE or MATFILE to plot
@@ -77,3 +77,5 @@ export default class HrefLayer extends Layer {
     return false;
   }
 }
+
+export default HrefLayer;

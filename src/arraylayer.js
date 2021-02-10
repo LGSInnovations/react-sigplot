@@ -19,7 +19,7 @@ import Layer from './layer';
  *     <ArrayLayer data={[[1, 2, 3], [2, 3, 4]]}/>
  *   </SigPlot>
  */
-export default class ArrayLayer extends Layer {
+class ArrayLayer extends Layer {
   /**
    * Handles ArrayLayer being mounted onto the DOM
    *
@@ -79,3 +79,5 @@ export default class ArrayLayer extends Layer {
     return false;
   }
 }
+
+export default ArrayLayer;
